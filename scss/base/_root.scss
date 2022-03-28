@@ -1,0 +1,12 @@
+@use '../abstracts/size';
+@use '../abstracts/border';
+
+:root {
+  @each $key, $value in size.$sizes {
+    --size-#{$key}: #{$value};
+  }
+
+  @each $key, $value in border.$radius {
+    --radius-#{$key}: #{$value};
+  }
+}

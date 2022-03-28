@@ -1,0 +1,43 @@
+@use '../abstracts/typography' as *;
+
+.button {
+  font-weight: $font-weight-bold;
+
+  padding-block: var(--size-4);
+  padding-inline: var(--size-6);
+
+  border: none;
+  border-radius: var(--radius-pill);
+
+  cursor: pointer;
+
+  background-color: var(--button-background);
+  color: var(--button-text);
+
+  &:hover,
+  &:focus-visible {
+    background-color: var(--button-hover);
+  }
+}
+
+$color-schemes: (
+  primary: (
+    light: (
+      background: hsl(253deg 94% 67%),
+      text: hsl(253deg 0% 100%),
+      hover: hsl(252deg 100% 73%),
+    ),
+  ),
+);
+
+@each $color-scheme, $modes in $color-schemes {
+  .button-#{$color-scheme} {
+    @each $mode, $colors in $modes {
+      @if $mode == light {
+        @each $property, $color in $colors {
+          --button-#{$property}: #{$color};
+        }
+      }
+    }
+  }
+}

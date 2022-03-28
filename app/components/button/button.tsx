@@ -2,5 +2,5 @@ type Props = {
   label: string
 }
 export function Button({ label }: Props): JSX.Element {
-  return <button>{label}</button>
+  return <button className="button button-primary">{label}</button>
 }
