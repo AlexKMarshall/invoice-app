@@ -1,5 +1,6 @@
 import { Button } from '.'
 import { ComponentMeta } from '@storybook/react'
+import { ComponentProps } from 'react'
 
 const meta: ComponentMeta<typeof Button> = {
   title: 'Components/Button',
@@ -9,8 +10,24 @@ const meta: ComponentMeta<typeof Button> = {
 
 export default meta
 
-export const Default = {
+type ButtonStory = {
+  args: ComponentProps<typeof Button>
+}
+
+const defaultArgs: ButtonStory['args'] = {
+  label: 'Press Me',
+}
+
+export const Primary: ButtonStory = {
   args: {
-    label: 'Press Me',
+    ...defaultArgs,
+    color: 'primary',
+  },
+}
+
+export const Secondary: ButtonStory = {
+  args: {
+    ...defaultArgs,
+    color: 'secondary',
   },
 }

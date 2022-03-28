@@ -11,6 +11,10 @@
 
   cursor: pointer;
 
+  --button-background: var(--button-background-light);
+  --button-text: var(--button-text-light);
+  --button-hover: var(--button-hover-light);
+
   background-color: var(--button-background);
   color: var(--button-text);
 
@@ -28,15 +32,20 @@ $color-schemes: (
       hover: hsl(252deg 100% 73%),
     ),
   ),
+  secondary: (
+    light: (
+      background: hsl(231deg 67% 99%),
+      text: hsl(231deg 36% 63%),
+      hover: hsl(231deg 73% 93%),
+    ),
+  ),
 );
 
 @each $color-scheme, $modes in $color-schemes {
-  .button-#{$color-scheme} {
+  .button-color-#{$color-scheme} {
     @each $mode, $colors in $modes {
-      @if $mode == light {
-        @each $property, $color in $colors {
-          --button-#{$property}: #{$color};
-        }
+      @each $property, $color in $colors {
+        --button-#{$property}-#{$mode}: #{$color};
       }
     }
   }
