@@ -17,6 +17,20 @@
 
   background-color: var(--button-background);
   color: var(--button-text);
+  outline-color: transparent;
+  outline-offset: 0px;
+
+  --transition-duration-color: 200ms;
+  --transition-timing-color: linear;
+  --transition-duration-space: 150ms;
+  --transition-timing-space: ease;
+
+  transition: background-color var(--transition-duration-color)
+      var(--transition-timing-color),
+    outline-color var(--transition-duration-color)
+      var(--transition-timing-color),
+    outline-offset var(--transition-duration-space)
+      var(--transition-timing-space);
 
   &:hover,
   &:focus-visible {
@@ -51,6 +65,13 @@ $color-schemes: (
       background: hsl(231deg 20% 27%),
       text: hsl(231deg 20% 61%),
       hover: hsl(231deg 28% 7%),
+    ),
+  ),
+  danger: (
+    light: (
+      background: hsl(0deg 80% 63%),
+      text: hsl(253deg 0% 100%),
+      hover: hsl(0deg 100% 80%),
     ),
   ),
 );

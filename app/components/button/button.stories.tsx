@@ -38,3 +38,10 @@ export const Mono: ButtonStory = {
     color: 'mono',
   },
 }
+
+export const Danger: ButtonStory = {
+  args: {
+    ...defaultArgs,
+    color: 'danger',
+  },
+}

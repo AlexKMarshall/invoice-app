@@ -5,11 +5,12 @@ const colorClassMap = {
   primary: 'button-color-primary',
   secondary: 'button-color-secondary',
   mono: 'button-color-mono',
+  danger: 'button-color-danger',
 }
 
 type Props = {
   label: string
-  color?: 'primary' | 'secondary' | 'mono'
+  color?: 'primary' | 'secondary' | 'mono' | 'danger'
 } & Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'className'>
 export function Button({
   label,
