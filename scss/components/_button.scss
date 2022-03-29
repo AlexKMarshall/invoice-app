@@ -46,6 +46,13 @@ $color-schemes: (
       hover: hsl(231deg 73% 93%),
     ),
   ),
+  mono: (
+    light: (
+      background: hsl(231deg 20% 27%),
+      text: hsl(231deg 20% 61%),
+      hover: hsl(231deg 28% 7%),
+    ),
+  ),
 );
 
 @each $color-scheme, $modes in $color-schemes {

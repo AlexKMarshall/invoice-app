@@ -4,11 +4,12 @@ import clsx from 'clsx'
 const colorClassMap = {
   primary: 'button-color-primary',
   secondary: 'button-color-secondary',
+  mono: 'button-color-mono',
 }
 
 type Props = {
   label: string
-  color?: 'primary' | 'secondary'
+  color?: 'primary' | 'secondary' | 'mono'
 } & Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'className'>
 export function Button({
   label,

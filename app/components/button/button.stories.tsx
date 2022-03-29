@@ -31,3 +31,10 @@ export const Secondary: ButtonStory = {
     color: 'secondary',
   },
 }
+
+export const Mono: ButtonStory = {
+  args: {
+    ...defaultArgs,
+    color: 'mono',
+  },
+}
