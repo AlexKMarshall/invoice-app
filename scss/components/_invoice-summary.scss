@@ -20,6 +20,10 @@
     gap: var(--size-2);
   }
 
+  & svg {
+    display: none;
+  }
+
   @include small {
     grid-template-columns: 9% 17% 1fr 1fr auto;
     grid-template-rows: auto;
@@ -40,6 +44,11 @@
 
     & .amount {
       justify-self: end;
+    }
+
+    & svg {
+      display: block;
+      width: var(--size-2);
     }
   }
 }

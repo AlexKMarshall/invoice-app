@@ -1,6 +1,7 @@
 import { InvoiceId } from '~/components/invoice-id'
 import { StatusBadge } from '~/components/status-badge'
 import clsx from 'clsx'
+import { ArrowRightIcon } from '~/components/icons/arrow-right'
 
 const intlDateTimeFormat = new Intl.DateTimeFormat(undefined, {
   day: '2-digit',
@@ -48,6 +49,7 @@ export function InvoiceSummary({
         </p>
       </div>
       <StatusBadge status={status} />
+      <ArrowRightIcon className="color-primary" />
     </article>
   )
 }
