@@ -1,11 +1,14 @@
 body {
   --background-color-light: hsl(240deg 27% 98%);
   --foreground-color-light: hsl(231deg 20% 61%);
+  --foreground-color-strong-light: hsl(231deg 28% 7%);
   --background-color-dark: hsl(233deg 30% 11%);
   --foreground-color-dark: hsl(231deg 75% 93%);
+  --foreground-color-strong-dark: hsl(231deg 0% 100%);
 
   --background-color: var(--background-color-light);
   --foreground-color: var(--foreground-color-light);
+  --foreground-color-strong: var(--foreground-color-strong-light);
   background-color: var(--background-color);
   color: var(--foreground-color);
 }
@@ -13,9 +16,11 @@ body {
 [data-theme='light'] {
   --background-color: var(--background-color-light);
   --foreground-color: var(--foreground-color-light);
+  --foreground-color-strong: var(--foreground-color-strong-light);
 }
 
 [data-theme='dark'] {
   --background-color: var(--background-color-dark);
   --foreground-color: var(--foreground-color-dark);
+  --foreground-color-strong: var(--foreground-color-strong-dark);
 }

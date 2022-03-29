@@ -150,6 +150,19 @@ Max width of invoice main on desktop 730px
 
 ## Typography
 
+### Scale
+
+| Step | Size |
+| ---- | ---- |
+| 1    | 11px |
+| 2    | 12px |
+| 3    | 15px |
+| 4    | 16px |
+| 5    | 18px |
+| 6    | 20px |
+| 7    | 24px |
+| 8    | 32px |
+
 ### Mobile
 
 - 11px medium -0.23px 1.5LH

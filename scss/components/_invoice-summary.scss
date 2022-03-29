@@ -1,3 +1,14 @@
 .invoice-summary {
   padding: var(--size-6);
+  display: grid;
+  grid-template-columns: repeat(2, auto);
+  gap: var(--size-6);
+  align-items: center;
+  justify-content: space-between;
+
+  & .due-amount {
+    display: flex;
+    flex-direction: column;
+    gap: var(--size-2);
+  }
 }

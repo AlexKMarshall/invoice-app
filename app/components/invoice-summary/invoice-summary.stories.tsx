@@ -1,4 +1,5 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react'
+import { ReactNode, useLayoutEffect } from 'react'
 
 import { InvoiceSummary } from '.'
 
@@ -26,15 +27,27 @@ Default.args = {
   status: 'paid',
 }
 
-// function DarkMode({ children }: { children: ReactNode }) {
-//   useLayoutEffect(() => {
-//     const body = document.querySelector('body')
-//     body?.setAttribute('data-theme', 'dark')
+export const DefaultDarkMode = Template.bind({})
+DefaultDarkMode.args = {
+  ...Default.args,
+}
+DefaultDarkMode.decorators = [
+  (Story) => (
+    <DarkMode>
+      <Story />
+    </DarkMode>
+  ),
+]
 
-//     return () => {
-//       body?.removeAttribute('data-theme')
-//     }
-//   }, [])
+function DarkMode({ children }: { children: ReactNode }) {
+  useLayoutEffect(() => {
+    const body = document.querySelector('body')
+    body?.setAttribute('data-theme', 'dark')
 
-//   return <>{children}</>
-// }
+    return () => {
+      body?.removeAttribute('data-theme')
+    }
+  }, [])
+
+  return <>{children}</>
+}

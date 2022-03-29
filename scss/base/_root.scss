@@ -1,5 +1,6 @@
 @use '../abstracts/size';
 @use '../abstracts/border';
+@use '../abstracts/typography';
 
 :root {
   @each $key, $value in size.$sizes {
@@ -8,6 +9,10 @@
 
   @each $key, $value in border.$radius {
     --radius-#{$key}: #{$value};
+  }
+
+  @each $key, $value in typography.$sizes {
+    --font-size-#{$key}: #{$value};
   }
 
   --transition-duration-fast: 150ms;

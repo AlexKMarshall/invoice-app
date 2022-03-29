@@ -3,8 +3,10 @@
 @use 'base/typography';
 @use 'base/color';
 
-@use 'utilities/surface';
 @use 'utilities/border';
+@use 'utilities/color' as utilities-color;
+@use 'utilities/surface';
+@use 'utilities/typography' as utilities-typography;
 
 @use 'components/button';
 @use 'components/invoice-id';

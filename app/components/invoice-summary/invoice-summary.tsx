@@ -1,3 +1,4 @@
+import { InvoiceId } from '~/components/invoice-id'
 import { StatusBadge } from '~/components/status-badge'
 import clsx from 'clsx'
 
@@ -36,10 +37,16 @@ export function InvoiceSummary({
 
   return (
     <article className={className}>
-      <h2>{id}</h2>
+      <h2>
+        <InvoiceId id={id} />
+      </h2>
       <p>{name}</p>
-      <p>{formattedDueDate}</p>
-      <p>{formattedAmount}</p>
+      <div className="due-amount">
+        <p>Due {formattedDueDate}</p>
+        <p className="text-color-strong font-size-4 font-weight-bold">
+          {formattedAmount}
+        </p>
+      </div>
       <StatusBadge status={status} />
     </article>
   )
