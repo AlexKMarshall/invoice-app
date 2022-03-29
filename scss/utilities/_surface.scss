@@ -1,0 +1,43 @@
+$color-schemes: (
+  1: (
+    light: (
+      background: hsl(0deg 0% 100%),
+      foreground: hsl(231deg 36% 63%),
+    ),
+    dark: (
+      background: hsl(233deg 31% 17%),
+      foreground: hsl(231deg 75% 93%),
+    ),
+  ),
+);
+
+@each $color-scheme, $modes in $color-schemes {
+  .surface-#{$color-scheme} {
+    @each $mode, $props in $modes {
+      @each $prop, $color in $props {
+        --surface-#{$prop}-#{$mode}: $color;
+      }
+    }
+  }
+}
+
+.surface {
+  --surface-background-default: var(--surface-background-light);
+  --surface-foreground-default: var(--surface-foreground-light);
+  --surface-background: var(
+    --surface-background-variable,
+    var(--surface-background-default)
+  );
+  --surface-foreground: var(
+    --surface-foreground-variable,
+    var(--surface-foreground-default)
+  );
+
+  background-color: var(--surface-background);
+  color: var(--surface-foreground);
+
+  [data-theme='dark'] & {
+    --surface-background-variable: var(--surface-background-dark);
+    --surface-foreground-variable: var(--surface-foreground-dark);
+  }
+}

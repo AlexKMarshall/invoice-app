@@ -3,5 +3,7 @@
 @use 'base/typography';
 @use 'base/color';
 
+@use 'utilities/surface';
+
 @use 'components/button';
 @use 'components/status-badge';
