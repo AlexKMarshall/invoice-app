@@ -11,7 +11,6 @@ const meta: ComponentMeta<typeof Button> = {
 
 export default meta
 
-// type ButtonStory = ComponentStory<typeof Button>
 const defaultArgs: ComponentProps<typeof Button> = {
   label: 'Press Me',
 }
