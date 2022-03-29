@@ -15,7 +15,7 @@ $color-schemes: (
   .surface-#{$color-scheme} {
     @each $mode, $props in $modes {
       @each $prop, $color in $props {
-        --surface-#{$prop}-#{$mode}: $color;
+        --surface-#{$prop}-#{$mode}: #{$color};
       }
     }
   }
