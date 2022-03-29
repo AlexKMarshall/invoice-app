@@ -24,17 +24,17 @@ $color-schemes: (
 .surface {
   --surface-background-default: var(--surface-background-light);
   --surface-foreground-default: var(--surface-foreground-light);
-  --surface-background: var(
+  --background-color: var(
     --surface-background-variable,
     var(--surface-background-default)
   );
-  --surface-foreground: var(
+  --foreground-color: var(
     --surface-foreground-variable,
     var(--surface-foreground-default)
   );
 
-  background-color: var(--surface-background);
-  color: var(--surface-foreground);
+  background-color: var(--background-color);
+  color: var(--foreground-color);
 
   [data-theme='dark'] & {
     --surface-background-variable: var(--surface-background-dark);

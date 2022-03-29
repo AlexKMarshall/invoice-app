@@ -1,0 +1,11 @@
+@use '../abstracts/typography' as *;
+
+.invoice-id {
+  font-weight: $font-weight-bold;
+
+  &::before {
+    content: '#';
+    font-weight: $font-weight-medium;
+    color: var(--foreground-color);
+  }
+}
