@@ -14,9 +14,15 @@
   --button-background-default: var(--button-background-light);
   --button-text-default: var(--button-text-light);
   --button-hover-default: var(--button-hover-light);
+  --button-background: var(
+    --button-background-variable,
+    var(--button-background-default)
+  );
+  --button-text: var(--button-text-variable, var(--button-text-default));
+  --button-hover: var(--button-hover-variable, var(--button-hover-default));
 
-  background-color: var(--button-background, var(--button-background-default));
-  color: var(--button-text, var(--button-text-default));
+  background-color: var(--button-background);
+  color: var(--button-text);
   outline-color: transparent;
   outline-offset: 0px;
 
@@ -34,20 +40,20 @@
 
   &:hover,
   &:focus-visible {
-    background-color: var(--button-hover, var(--button-hover-default));
+    background-color: var(--button-hover);
   }
 
   &:focus-visible {
     outline-width: 3px;
     outline-style: solid;
-    outline-color: var(--button-hover, var(--button-hover-default));
+    outline-color: var(--button-hover);
     outline-offset: 4px;
   }
 
   [data-theme='dark'] & {
-    --button-background: var(--button-background-dark);
-    --button-text: var(--button-text-dark);
-    --button-hover: var(--button-hover-dark);
+    --button-background-variable: var(--button-background-dark);
+    --button-text-variable: var(--button-text-dark);
+    --button-hover-variable: var(--button-hover-dark);
   }
 }
 
