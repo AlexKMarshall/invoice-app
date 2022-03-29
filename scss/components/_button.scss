@@ -20,9 +20,9 @@
   outline-color: transparent;
   outline-offset: 0px;
 
-  --transition-duration-color: 200ms;
+  --transition-duration-color: var(--transition-duration-medium);
   --transition-timing-color: linear;
-  --transition-duration-space: 150ms;
+  --transition-duration-space: var(--transition-duration-fast);
   --transition-timing-space: ease;
 
   transition: background-color var(--transition-duration-color)
