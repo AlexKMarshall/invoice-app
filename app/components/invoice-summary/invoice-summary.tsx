@@ -37,13 +37,13 @@ export function InvoiceSummary({
 
   return (
     <article className={className}>
-      <h2>
+      <h2 className="heading">
         <InvoiceId id={id} />
       </h2>
-      <p>{name}</p>
+      <p className="name">{name}</p>
       <div className="due-amount">
-        <p>Due {formattedDueDate}</p>
-        <p className="text-color-strong font-size-4 font-weight-bold">
+        <p className="due">Due {formattedDueDate}</p>
+        <p className="text-color-strong font-size-4 font-weight-bold amount">
           {formattedAmount}
         </p>
       </div>
