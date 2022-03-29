@@ -1,0 +1,21 @@
+body {
+  --background-color-light: hsl(240deg 27% 98%);
+  --foreground-color-light: hsl(231deg 20% 61%);
+  --background-color-dark: hsl(233deg 30% 11%);
+  --foreground-color-dark: hsl(231deg 75% 93%);
+
+  --background-color: var(--background-color-light);
+  --foreground-color: var(--foreground-color-light);
+  background-color: var(--background-color);
+  color: var(--foreground-color);
+}
+
+[data-theme='light'] {
+  --background-color: var(--background-color-light);
+  --foreground-color: var(--foreground-color-light);
+}
+
+[data-theme='dark'] {
+  --background-color: var(--background-color-dark);
+  --foreground-color: var(--foreground-color-dark);
+}
