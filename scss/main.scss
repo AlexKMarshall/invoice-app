@@ -1,2 +1,7 @@
 @use 'base/reset';
+@use 'base/root';
 @use 'base/typography';
+@use 'base/color';
+
+@use 'components/button';
+@use 'components/status-badge';

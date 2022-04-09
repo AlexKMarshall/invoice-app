@@ -12,8 +12,7 @@
 | 4    | 16px  |
 | 5    | 20px  |
 | 6    | 24px  |
-| 7    | 28px  |
-| 8    | 32px  |
+| 7    | 32px  |
 | 8    | 40px  |
 | 9    | 48px  |
 | 10   | 56px  |
@@ -30,6 +29,7 @@
 - 12px
   - gap between filter text and icon
   - gap between field heading and content in invoice
+  - padding block on status badge
 - 16px
   - gap between invoices
   - block padding buttons
@@ -68,6 +68,7 @@
   - gap between buttons on form
 - 12px
   - gap between field heading and content in invoice
+  - padding block on status badge
 - 16px
   - gap between icon and button text
   - gap between filter text and icon
@@ -109,6 +110,7 @@
   - gap between buttons on form
 - 12px
   - gap between field heading and content in invoice
+  - padding block on status badge
 - 16px
   - gap between icon and button text
   - gap between filter text and icon

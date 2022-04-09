@@ -1,0 +1,109 @@
+@use '../abstracts/typography' as *;
+
+.button {
+  font-weight: $font-weight-bold;
+
+  padding-block: var(--size-4);
+  padding-inline: var(--size-6);
+
+  border: none;
+  border-radius: var(--radius-pill);
+
+  cursor: pointer;
+
+  --button-background-default: var(--button-background-light);
+  --button-text-default: var(--button-text-light);
+  --button-hover-default: var(--button-hover-light);
+  --button-background: var(
+    --button-background-variable,
+    var(--button-background-default)
+  );
+  --button-text: var(--button-text-variable, var(--button-text-default));
+  --button-hover: var(--button-hover-variable, var(--button-hover-default));
+
+  background-color: var(--button-background);
+  color: var(--button-text);
+  outline-color: transparent;
+  outline-offset: 0px;
+
+  --transition-duration-color: var(--transition-duration-medium);
+  --transition-timing-color: linear;
+  --transition-duration-space: var(--transition-duration-fast);
+  --transition-timing-space: ease;
+
+  transition: background-color var(--transition-duration-color)
+      var(--transition-timing-color),
+    outline-color var(--transition-duration-color)
+      var(--transition-timing-color),
+    outline-offset var(--transition-duration-space)
+      var(--transition-timing-space);
+
+  &:hover,
+  &:focus-visible {
+    background-color: var(--button-hover);
+  }
+
+  &:focus-visible {
+    outline-width: 3px;
+    outline-style: solid;
+    outline-color: var(--button-hover);
+    outline-offset: 4px;
+  }
+
+  [data-theme='dark'] & {
+    --button-background-variable: var(--button-background-dark);
+    --button-text-variable: var(--button-text-dark);
+    --button-hover-variable: var(--button-hover-dark);
+  }
+}
+
+$color-schemes: (
+  primary: (
+    light: (
+      background: hsl(253deg 94% 67%),
+      text: hsl(253deg 0% 100%),
+      hover: hsl(252deg 100% 73%),
+    ),
+  ),
+  secondary: (
+    light: (
+      background: hsl(231deg 67% 99%),
+      text: hsl(231deg 36% 63%),
+      hover: hsl(231deg 73% 93%),
+    ),
+    dark: (
+      background: hsl(233deg 30% 21%),
+      text: hsl(231deg 75% 93%),
+      hover: hsl(233deg 30% 100%),
+    ),
+  ),
+  mono: (
+    light: (
+      background: hsl(231deg 20% 27%),
+      text: hsl(231deg 20% 61%),
+      hover: hsl(231deg 28% 7%),
+    ),
+    dark: (
+      background: hsl(231deg 20% 27%),
+      text: hsl(231deg 75% 93%),
+      hover: hsl(231deg 31% 17%),
+    ),
+  ),
+  danger: (
+    light: (
+      background: hsl(0deg 80% 63%),
+      text: hsl(253deg 0% 100%),
+      hover: hsl(0deg 100% 80%),
+    ),
+  ),
+);
+
+@each $color-scheme, $modes in $color-schemes {
+  .button-color-#{$color-scheme} {
+    @each $mode, $colors in $modes {
+      @each $property, $color in $colors {
+        --button-#{$property}-#{$mode}: #{$color};
+      }
+    }
+  }
+}

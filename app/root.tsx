@@ -15,6 +15,16 @@ import { getUser } from './session.server'
 
 export const links: LinksFunction = () => {
   return [
+    { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
+    {
+      rel: 'preconnect',
+      href: 'https://fonts.gstatic.com',
+      crossOrigin: 'anonymous',
+    },
+    {
+      rel: 'stylesheet',
+      href: 'https://fonts.googleapis.com/css2?family=Spartan:wght@500;700&display=swap',
+    },
     { rel: 'stylesheet', href: tailwindStylesheetUrl },
     { rel: 'stylesheet', href: sassStylesheetUrl },
   ]

@@ -1,0 +1,16 @@
+@use '../abstracts/size';
+@use '../abstracts/border';
+
+:root {
+  @each $key, $value in size.$sizes {
+    --size-#{$key}: #{$value};
+  }
+
+  @each $key, $value in border.$radius {
+    --radius-#{$key}: #{$value};
+  }
+
+  --transition-duration-fast: 150ms;
+  --transition-duration-medium: 200ms;
+  --transition-duration-slow: 300ms;
+}
