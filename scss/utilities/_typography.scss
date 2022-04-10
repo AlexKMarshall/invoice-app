@@ -1,0 +1,15 @@
+@use '../abstracts/typography' as *;
+
+.font-weight-medium {
+  font-weight: $font-weight-bold;
+}
+
+.font-weight-bold {
+  font-weight: $font-weight-bold;
+}
+
+@each $key, $value in $sizes {
+  .font-size-#{$key} {
+    font-size: $value;
+  }
+}

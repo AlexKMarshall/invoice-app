@@ -10,9 +10,10 @@ type Props = {
   status: 'pending' | 'paid' | 'draft'
 }
 export function StatusBadge({ status }: Props): JSX.Element {
-  const baseClass = 'status-badge'
-  const statusClass = statusClassMap[status]
-  const className = clsx(baseClass, statusClass)
+  const utilityClasses = ['radius-s']
+  const blockClass = 'status-badge'
+  const variantClass = statusClassMap[status]
+  const className = clsx(utilityClasses, blockClass, variantClass)
 
   return <p className={className}>{status}</p>
 }
