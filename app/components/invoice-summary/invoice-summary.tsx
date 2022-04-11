@@ -3,6 +3,7 @@ import { InvoiceId } from '~/components/invoice-id'
 import { RemixLinkProps } from '@remix-run/react/components'
 import { StatusBadge } from '~/components/status-badge'
 import clsx from 'clsx'
+import { useRef } from 'react'
 
 const intlDateTimeFormat = new Intl.DateTimeFormat(undefined, {
   day: '2-digit',
@@ -30,6 +31,8 @@ export function InvoiceSummary({
   Link,
   to,
 }: Props): JSX.Element {
+  const linkRef = useRef<HTMLAnchorElement>(null)
+
   const formattedDueDate = intlDateTimeFormat.format(due)
 
   const currencyFormatter = new Intl.NumberFormat(undefined, {
@@ -37,14 +40,20 @@ export function InvoiceSummary({
     currency,
   })
   const formattedAmount = currencyFormatter.format(amount)
+
   const utilityClasses = ['surface', 'surface-1', 'radius-m']
   const blockClasses = ['invoice-summary']
   const className = clsx(utilityClasses, blockClasses)
 
   return (
-    <article className={className}>
+    <article
+      className={className}
+      onClick={() => {
+        linkRef.current?.click()
+      }}
+    >
       <h2 className="heading">
-        <Link to={to}>
+        <Link to={to} ref={linkRef}>
           <InvoiceId id={id} />
         </Link>
       </h2>

@@ -1,4 +1,4 @@
-import { ReactNode, forwardRef } from 'react'
+import { MouseEventHandler, ReactNode, forwardRef } from 'react'
 
 type MockLinkProps = {
   to: string
@@ -6,14 +6,13 @@ type MockLinkProps = {
 }
 const MockLink = forwardRef<HTMLAnchorElement, MockLinkProps>(
   ({ to, children }: MockLinkProps, ref) => {
+    const handleClick: MouseEventHandler<HTMLAnchorElement> = (e) => {
+      e.preventDefault()
+      console.log(`Clicked link to ${e.currentTarget.href}`)
+    }
+
     return (
-      <a
-        href={to}
-        ref={ref}
-        onClick={(e) => {
-          e.preventDefault()
-        }}
-      >
+      <a href={to} ref={ref} onClick={handleClick}>
         {children}
       </a>
     )
