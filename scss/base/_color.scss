@@ -11,6 +11,8 @@ body {
   --foreground-color-strong: var(--foreground-color-strong-light);
   background-color: var(--background-color);
   color: var(--foreground-color);
+
+  --color-primary: hsl(253deg 94% 67%);
 }
 
 [data-theme='light'] {
