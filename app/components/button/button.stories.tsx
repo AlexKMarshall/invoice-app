@@ -1,7 +1,8 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react'
-import { ComponentProps, ReactNode, useLayoutEffect } from 'react'
 
 import { Button } from '.'
+import { ComponentProps } from 'react'
+import { darkMode } from '~/storybook-helpers/dark-mode'
 
 const meta: ComponentMeta<typeof Button> = {
   title: 'Components/Button',
@@ -30,41 +31,16 @@ export const SecondaryDarkMode = Template.bind({})
 SecondaryDarkMode.args = {
   ...Secondary.args,
 }
-SecondaryDarkMode.decorators = [
-  (Story) => (
-    <DarkMode>
-      <Story />
-    </DarkMode>
-  ),
-]
+SecondaryDarkMode.decorators = [darkMode]
 
 export const Mono = Template.bind({})
 Mono.args = { color: 'mono' }
 
 export const MonoDarkMode = Template.bind({})
 MonoDarkMode.args = { ...Mono.args }
-MonoDarkMode.decorators = [
-  (Story) => (
-    <DarkMode>
-      <Story />
-    </DarkMode>
-  ),
-]
+MonoDarkMode.decorators = [darkMode]
 
 export const Danger = Template.bind({})
 Danger.args = {
   color: 'danger',
-}
-
-function DarkMode({ children }: { children: ReactNode }) {
-  useLayoutEffect(() => {
-    const body = document.querySelector('body')
-    body?.setAttribute('data-theme', 'dark')
-
-    return () => {
-      body?.removeAttribute('data-theme')
-    }
-  }, [])
-
-  return <>{children}</>
 }

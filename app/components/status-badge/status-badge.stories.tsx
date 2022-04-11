@@ -1,7 +1,7 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react'
-import { ReactNode, useLayoutEffect } from 'react'
 
 import { StatusBadge } from '.'
+import { darkMode } from '~/storybook-helpers/dark-mode'
 
 const meta: ComponentMeta<typeof StatusBadge> = {
   title: 'Components/StatusBadge',
@@ -34,23 +34,4 @@ export const DraftDarkMode = Template.bind({})
 DraftDarkMode.args = {
   ...Draft.args,
 }
-DraftDarkMode.decorators = [
-  (Story) => (
-    <DarkMode>
-      <Story />
-    </DarkMode>
-  ),
-]
-
-function DarkMode({ children }: { children: ReactNode }) {
-  useLayoutEffect(() => {
-    const body = document.querySelector('body')
-    body?.setAttribute('data-theme', 'dark')
-
-    return () => {
-      body?.removeAttribute('data-theme')
-    }
-  }, [])
-
-  return <>{children}</>
-}
+DraftDarkMode.decorators = [darkMode]

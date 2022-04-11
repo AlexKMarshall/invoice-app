@@ -8,8 +8,10 @@
 @use 'utilities/color' as utilities-color;
 @use 'utilities/surface';
 @use 'utilities/typography' as utilities-typography;
+@use 'utilities/stack';
 
 @use 'components/button';
 @use 'components/invoice-id';
 @use 'components/invoice-summary';
+@use 'components/invoice-list';
 @use 'components/status-badge';
