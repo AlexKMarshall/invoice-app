@@ -1,10 +1,10 @@
-import { MouseEventHandler, useRef } from 'react'
-
 import { ArrowRightIcon } from '~/components/icons/arrow-right'
 import { InvoiceId } from '~/components/invoice-id'
 import { RemixLinkProps } from '@remix-run/react/components'
 import { StatusBadge } from '~/components/status-badge'
 import clsx from 'clsx'
+import useClickUnlessDrag from '~/hooks/use-click-unless-drag'
+import { useRef } from 'react'
 
 const intlDateTimeFormat = new Intl.DateTimeFormat(undefined, {
   day: '2-digit',
@@ -46,24 +46,15 @@ export function InvoiceSummary({
   const blockClasses = ['invoice-summary']
   const className = clsx(utilityClasses, blockClasses)
 
-  const mouseDownTimestampRef = useRef(0)
-  const handleMouseDown: MouseEventHandler = (e) => {
-    mouseDownTimestampRef.current = Date.now()
-  }
-  const handleMouseUp: MouseEventHandler = (e) => {
-    const detectDraggingTime = 200
-    const mouseUpTimestamp = Date.now()
-    if (mouseUpTimestamp - mouseDownTimestampRef.current < detectDraggingTime) {
+  const dragOrClickProps = useClickUnlessDrag({
+    minDragTime: 200,
+    onClick: () => {
       linkRef.current?.click()
-    }
-  }
+    },
+  })
 
   return (
-    <article
-      className={className}
-      onMouseDown={handleMouseDown}
-      onMouseUp={handleMouseUp}
-    >
+    <article className={className} {...dragOrClickProps}>
       <h2 className="heading">
         <Link to={to} ref={linkRef}>
           <InvoiceId id={id} />
