@@ -1,5 +1,13 @@
+@use '../abstracts/media-queries' as *;
+
 .invoice-list {
   margin: 0;
   padding: 0;
   list-style-type: none;
+
+  --stack-gap: var(--size-4);
+
+  @include small {
+    --stack-gap: var(--size-3);
+  }
 }
