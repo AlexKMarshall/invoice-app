@@ -8,7 +8,6 @@
   &[data-invalid] {
     --foreground-color: var(--color-danger);
     --outline-default-color: var(--color-danger);
-    --outline-focus-color: var(--color-danger);
   }
 
   &[data-readOnly] {
