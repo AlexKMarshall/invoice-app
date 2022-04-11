@@ -17,10 +17,6 @@ body {
   --color-danger: hsl(0deg 80% 63%);
 }
 
-* {
-  color: var(--foreground-color);
-}
-
 [data-theme='light'] {
   --background-color: var(--background-color-light);
   --foreground-color: var(--foreground-color-light);

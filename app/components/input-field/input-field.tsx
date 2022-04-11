@@ -20,7 +20,7 @@ export function InputField({
       data-invalid={isInvalid || undefined}
       data-readOnly={readOnly || undefined}
     >
-      <div className="cluster">
+      <div className="cluster labels">
         <label htmlFor={id}>{label}</label>
         <p id={errorMessageId} aria-live="polite">
           {errorMessage}

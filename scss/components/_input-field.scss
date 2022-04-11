@@ -4,6 +4,10 @@
   --outline-default-color: hsl(231deg 75% 93%);
   --outline-focus-color: var(--color-primary-faded);
 
+  & .labels {
+    color: var(--foreground-color);
+  }
+
   // could later be replaced with &:has( [aria-invalid]) to validate semantics
   &[data-invalid] {
     --foreground-color: var(--color-danger);
