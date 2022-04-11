@@ -5,7 +5,7 @@
   --outline-focus-color: var(--color-primary-faded);
   --label-text-color: var(--text-color);
 
-  & .labels {
+  & .labels * {
     color: var(--label-text-color);
   }
 

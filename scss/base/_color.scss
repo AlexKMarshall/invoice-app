@@ -1,13 +1,4 @@
 body {
-  --background-color-light: hsl(240deg 27% 98%);
-  --foreground-color-light: hsl(231deg 20% 61%);
-  --foreground-color-dark: hsl(231deg 75% 93%);
-
-  --background-color: var(--background-color-light);
-  --foreground-color: var(--foreground-color-light);
-  background-color: var(--background-color);
-  color: var(--foreground-color);
-
   --color-primary: hsl(253deg 94% 67%);
   --color-primary-faded: hsl(252deg 100% 73%);
   --color-danger: hsl(0deg 80% 63%);
@@ -48,14 +39,4 @@ body {
   --text1: var(--text1-dark);
   --text2: var(--text2-dark);
   --text3: var(--text1-dark);
-}
-
-[data-theme='light'] {
-  --background-color: var(--background-color-light);
-  --foreground-color: var(--foreground-color-light);
-}
-
-[data-theme='dark'] {
-  --background-color: var(--background-color-dark);
-  --foreground-color: var(--foreground-color-dark);
 }
