@@ -42,7 +42,7 @@ export function InvoiceSummary({
   })
   const formattedAmount = currencyFormatter.format(amount)
 
-  const utilityClasses = ['surface', 'surface-1', 'radius-m']
+  const utilityClasses = ['surface1', 'radius-m']
   const blockClasses = ['invoice-summary']
   const className = clsx(utilityClasses, blockClasses)
 
@@ -63,7 +63,7 @@ export function InvoiceSummary({
       <p className="name">{name}</p>
       <div className="due-amount">
         <p className="due">Due {formattedDueDate}</p>
-        <p className="text-color-strong font-size-4 font-weight-bold amount">
+        <p className="text-strong font-size-4 font-weight-bold amount">
           {formattedAmount}
         </p>
       </div>

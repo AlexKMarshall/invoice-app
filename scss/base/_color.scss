@@ -17,6 +17,40 @@ body {
   --color-danger: hsl(0deg 80% 63%);
 }
 
+:root {
+  --surface1-light: hsl(231deg 100% 100%);
+  --surface2-light: hsl(240deg 27% 98%);
+  --surface3-light: hsl(231deg 20% 27%);
+  --text1-light: hsl(231deg 28% 7%);
+  --text2-light: hsl(231deg 23% 61%);
+  --text3-light: hsl(231deg 100% 100%);
+
+  --surface1-dark: hsl(233deg 31% 17%);
+  --surface2-dark: hsl(233deg 30% 21%);
+  --surface3-dark: hsl(231deg 28% 7%);
+  --text1-dark: hsl(233deg 100% 100%);
+  --text2-dark: hsl(231deg 75% 93%);
+}
+
+:root,
+[data-theme='light'] {
+  --surface1: var(--surface1-light);
+  --surface2: var(--surface2-light);
+  --surface3: var(--surface3-light);
+  --text1: var(--text1-light);
+  --text2: var(--text2-light);
+  --text3: var(--text3-light);
+}
+
+[data-theme='dark'] {
+  --surface1: var(--surface1-dark);
+  --surface2: var(--surface2-dark);
+  --surface3: var(--surface3-dark);
+  --text1: var(--text1-dark);
+  --text2: var(--text2-dark);
+  --text3: var(--text1-dark);
+}
+
 [data-theme='light'] {
   --background-color: var(--background-color-light);
   --foreground-color: var(--foreground-color-light);

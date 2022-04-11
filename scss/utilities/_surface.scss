@@ -1,43 +1,17 @@
-$color-schemes: (
-  1: (
-    light: (
-      background: hsl(0deg 0% 100%),
-      foreground: hsl(231deg 36% 63%),
-    ),
-    dark: (
-      background: hsl(233deg 31% 17%),
-      foreground: hsl(231deg 75% 93%),
-    ),
-  ),
-);
-
-@each $color-scheme, $modes in $color-schemes {
-  .surface-#{$color-scheme} {
-    @each $mode, $props in $modes {
-      @each $prop, $color in $props {
-        --surface-#{$prop}-#{$mode}: #{$color};
-      }
-    }
-  }
+.surface1 {
+  background-color: var(--surface1);
+  color: var(--text2);
+  --text-strong: var(--text1);
 }
 
-.surface {
-  --surface-background-default: var(--surface-background-light);
-  --surface-foreground-default: var(--surface-foreground-light);
-  --background-color: var(
-    --surface-background-variable,
-    var(--surface-background-default)
-  );
-  --foreground-color: var(
-    --surface-foreground-variable,
-    var(--surface-foreground-default)
-  );
+.surface2 {
+  background-color: var(--surface2);
+  color: var(--text2);
+  --text-strong: var(--text1);
+}
 
-  background-color: var(--background-color);
-  color: var(--foreground-color);
-
-  [data-theme='dark'] & {
-    --surface-background-variable: var(--surface-background-dark);
-    --surface-foreground-variable: var(--surface-foreground-dark);
-  }
+.surface3 {
+  background-color: var(--surface3);
+  color: var(--text3);
+  --text-strong: var(--text3);
 }
