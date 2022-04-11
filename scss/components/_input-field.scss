@@ -11,6 +11,10 @@
     --outline-focus-color: var(--color-danger);
   }
 
+  &[data-readOnly] {
+    opacity: 50%;
+  }
+
   [data-theme='dark'] &:not([data-invalid]) {
     --outline-default-color: transparent;
   }
