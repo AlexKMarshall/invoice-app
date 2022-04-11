@@ -1,9 +1,10 @@
+import { MouseEventHandler, useRef } from 'react'
+
 import { ArrowRightIcon } from '~/components/icons/arrow-right'
 import { InvoiceId } from '~/components/invoice-id'
 import { RemixLinkProps } from '@remix-run/react/components'
 import { StatusBadge } from '~/components/status-badge'
 import clsx from 'clsx'
-import { useRef } from 'react'
 
 const intlDateTimeFormat = new Intl.DateTimeFormat(undefined, {
   day: '2-digit',
@@ -45,12 +46,23 @@ export function InvoiceSummary({
   const blockClasses = ['invoice-summary']
   const className = clsx(utilityClasses, blockClasses)
 
+  const mouseDownTimestampRef = useRef(0)
+  const handleMouseDown: MouseEventHandler = (e) => {
+    mouseDownTimestampRef.current = Date.now()
+  }
+  const handleMouseUp: MouseEventHandler = (e) => {
+    const detectDraggingTime = 200
+    const mouseUpTimestamp = Date.now()
+    if (mouseUpTimestamp - mouseDownTimestampRef.current < detectDraggingTime) {
+      linkRef.current?.click()
+    }
+  }
+
   return (
     <article
       className={className}
-      onClick={() => {
-        linkRef.current?.click()
-      }}
+      onMouseDown={handleMouseDown}
+      onMouseUp={handleMouseUp}
     >
       <h2 className="heading">
         <Link to={to} ref={linkRef}>
