@@ -9,6 +9,10 @@
   justify-items: end;
   justify-content: space-between;
 
+  & a {
+    text-decoration: none;
+  }
+
   & .heading {
     justify-self: start;
   }

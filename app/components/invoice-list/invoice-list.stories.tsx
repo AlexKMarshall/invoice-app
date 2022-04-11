@@ -3,6 +3,7 @@ import { ComponentMeta, ComponentStory } from '@storybook/react'
 import { ComponentProps } from 'react'
 import { InvoiceList } from '.'
 import { InvoiceSummary } from '../invoice-summary'
+import MockLink from '~/storybook-helpers/mock-link'
 import { darkMode } from '~/storybook-helpers/dark-mode'
 
 const meta: ComponentMeta<typeof InvoiceList> = {
@@ -41,6 +42,8 @@ OneItem.args = {
       amount: 1800.9,
       currency: 'GBP',
       status: 'paid',
+      Link: MockLink,
+      to: '/some-page',
     },
   ],
 }
@@ -55,6 +58,8 @@ MultipleItems.args = {
       amount: 1800.9,
       currency: 'GBP',
       status: 'paid',
+      Link: MockLink,
+      to: '/some-page',
     },
     {
       id: 'XM9141',
@@ -63,6 +68,8 @@ MultipleItems.args = {
       amount: 556,
       currency: 'GBP',
       status: 'pending',
+      Link: MockLink,
+      to: '/some-page',
     },
     {
       id: 'FV2353',
@@ -71,6 +78,8 @@ MultipleItems.args = {
       amount: 3102.04,
       currency: 'GBP',
       status: 'draft',
+      Link: MockLink,
+      to: '/some-page',
     },
   ],
 }

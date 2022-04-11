@@ -1,7 +1,8 @@
+import { ArrowRightIcon } from '~/components/icons/arrow-right'
 import { InvoiceId } from '~/components/invoice-id'
+import { RemixLinkProps } from '@remix-run/react/components'
 import { StatusBadge } from '~/components/status-badge'
 import clsx from 'clsx'
-import { ArrowRightIcon } from '~/components/icons/arrow-right'
 
 const intlDateTimeFormat = new Intl.DateTimeFormat(undefined, {
   day: '2-digit',
@@ -16,6 +17,8 @@ type Props = {
   amount: number
   currency: 'GBP'
   status: 'paid' | 'pending' | 'draft'
+  Link: any // cop-out until possible to mock Remix
+  to: RemixLinkProps['to']
 }
 export function InvoiceSummary({
   id,
@@ -24,6 +27,8 @@ export function InvoiceSummary({
   amount,
   currency,
   status,
+  Link,
+  to,
 }: Props): JSX.Element {
   const formattedDueDate = intlDateTimeFormat.format(due)
 
@@ -39,7 +44,9 @@ export function InvoiceSummary({
   return (
     <article className={className}>
       <h2 className="heading">
-        <InvoiceId id={id} />
+        <Link to={to}>
+          <InvoiceId id={id} />
+        </Link>
       </h2>
       <p className="name">{name}</p>
       <div className="due-amount">
