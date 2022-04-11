@@ -1,6 +1,5 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react'
 
-import { ComponentProps } from 'react'
 import { InputField } from '.'
 import { darkMode } from '~/storybook-helpers/dark-mode'
 
@@ -23,6 +22,9 @@ Default.args = {
 }
 
 export const DefaultDarkMode = Template.bind({})
+DefaultDarkMode.args = {
+  ...Default.args,
+}
 DefaultDarkMode.decorators = [darkMode]
 
 export const WithError = Template.bind({})
