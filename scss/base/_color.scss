@@ -1,14 +1,10 @@
 body {
   --background-color-light: hsl(240deg 27% 98%);
   --foreground-color-light: hsl(231deg 20% 61%);
-  --foreground-color-strong-light: hsl(231deg 28% 7%);
-  --background-color-dark: hsl(233deg 30% 11%);
   --foreground-color-dark: hsl(231deg 75% 93%);
-  --foreground-color-strong-dark: hsl(231deg 0% 100%);
 
   --background-color: var(--background-color-light);
   --foreground-color: var(--foreground-color-light);
-  --foreground-color-strong: var(--foreground-color-strong-light);
   background-color: var(--background-color);
   color: var(--foreground-color);
 
@@ -28,6 +24,7 @@ body {
   --surface1-dark: hsl(233deg 31% 17%);
   --surface2-dark: hsl(233deg 30% 21%);
   --surface3-dark: hsl(231deg 28% 7%);
+  --surface4-dark: hsl(233deg 30% 11%);
   --text1-dark: hsl(233deg 100% 100%);
   --text2-dark: hsl(231deg 75% 93%);
 }
@@ -37,6 +34,7 @@ body {
   --surface1: var(--surface1-light);
   --surface2: var(--surface2-light);
   --surface3: var(--surface3-light);
+  --surface4: var(--surface2-light);
   --text1: var(--text1-light);
   --text2: var(--text2-light);
   --text3: var(--text3-light);
@@ -46,6 +44,7 @@ body {
   --surface1: var(--surface1-dark);
   --surface2: var(--surface2-dark);
   --surface3: var(--surface3-dark);
+  --surface4: var(--surface4-dark);
   --text1: var(--text1-dark);
   --text2: var(--text2-dark);
   --text3: var(--text1-dark);
@@ -54,11 +53,9 @@ body {
 [data-theme='light'] {
   --background-color: var(--background-color-light);
   --foreground-color: var(--foreground-color-light);
-  --foreground-color-strong: var(--foreground-color-strong-light);
 }
 
 [data-theme='dark'] {
   --background-color: var(--background-color-dark);
   --foreground-color: var(--foreground-color-dark);
-  --foreground-color-strong: var(--foreground-color-strong-dark);
 }

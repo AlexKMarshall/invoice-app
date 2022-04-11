@@ -1,5 +1,7 @@
 import '../app/styles/sass-output/main.css'
 
+import { surface } from '../app/storybook-helpers/surface'
+
 export const parameters = {
   actions: { argTypesRegex: '^on[A-Z].*' },
   controls: {
@@ -10,3 +12,5 @@ export const parameters = {
   },
   chromatic: { viewports: [375, 768, 1440] },
 }
+
+export const decorators = [surface]

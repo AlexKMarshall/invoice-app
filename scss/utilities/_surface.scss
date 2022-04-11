@@ -1,17 +1,27 @@
 .surface1 {
   background-color: var(--surface1);
-  color: var(--text2);
+  --text-default: var(--text2);
   --text-strong: var(--text1);
 }
 
 .surface2 {
   background-color: var(--surface2);
-  color: var(--text2);
+  --text-default: var(--text2);
   --text-strong: var(--text1);
 }
 
 .surface3 {
   background-color: var(--surface3);
-  color: var(--text3);
+  --text-default: var(--text3);
   --text-strong: var(--text3);
+}
+
+.surface4 {
+  background: var(--surface4);
+  --text-default: var(--text2);
+  --text-strong: var(--text1);
+}
+
+* {
+  color: var(--text-default);
 }

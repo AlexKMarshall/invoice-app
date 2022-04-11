@@ -3,14 +3,15 @@
   --cluster-justify-content: space-between;
   --outline-default-color: hsl(231deg 75% 93%);
   --outline-focus-color: var(--color-primary-faded);
+  --label-text-color: var(--text-color);
 
   & .labels {
-    color: var(--foreground-color);
+    color: var(--label-text-color);
   }
 
   // could later be replaced with &:has( [aria-invalid]) to validate semantics
   &[data-invalid] {
-    --foreground-color: var(--color-danger);
+    --label-text-color: var(--color-danger);
     --outline-default-color: var(--color-danger);
   }
 
@@ -25,7 +26,6 @@
   & input {
     border: none;
 
-    --foreground-color: var(--foreground-color-strong);
     cursor: pointer;
     caret-color: var(--color-primary);
 
