@@ -1,24 +1,34 @@
 .input-field {
   --stack-gap: var(--size-2);
+  --cluster-justify-content: space-between;
+  --outline-default-color: hsl(231deg 75% 93%);
+  --outline-focus-color: var(--color-primary-faded);
+
+  // could later be replaced with &:has( [aria-invalid]) to validate semantics
+  &[data-invalid] {
+    --foreground-color: var(--color-danger);
+    --outline-default-color: var(--color-danger);
+    --outline-focus-color: var(--color-danger);
+  }
+
+  [data-theme='dark'] &:not([data-invalid]) {
+    --outline-default-color: transparent;
+  }
 
   & input {
     border: none;
 
+    --foreground-color: var(--foreground-color-strong);
     cursor: pointer;
     caret-color: var(--color-primary);
 
-    --outline-default-color: hsl(231deg 75% 93%);
     outline-width: 1px;
     outline-style: solid;
     outline-color: var(--outline-default-color);
     transition: outline-color var(--transition-duration-fast) linear;
 
     &:focus-visible {
-      outline-color: var(--color-primary-faded);
-    }
-
-    [data-theme='dark'] & {
-      --outline-default-color: transparent;
+      outline-color: var(--outline-focus-color);
     }
   }
 }
