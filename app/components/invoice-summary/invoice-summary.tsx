@@ -1,7 +1,10 @@
+import { ArrowRightIcon } from '~/components/icons/arrow-right'
 import { InvoiceId } from '~/components/invoice-id'
+import { RemixLinkProps } from '@remix-run/react/components'
 import { StatusBadge } from '~/components/status-badge'
 import clsx from 'clsx'
-import { ArrowRightIcon } from '~/components/icons/arrow-right'
+import useClickUnlessDrag from '~/hooks/use-click-unless-drag'
+import { useRef } from 'react'
 
 const intlDateTimeFormat = new Intl.DateTimeFormat(undefined, {
   day: '2-digit',
@@ -16,6 +19,8 @@ type Props = {
   amount: number
   currency: 'GBP'
   status: 'paid' | 'pending' | 'draft'
+  Link: any // cop-out until possible to mock Remix
+  to: RemixLinkProps['to']
 }
 export function InvoiceSummary({
   id,
@@ -24,7 +29,11 @@ export function InvoiceSummary({
   amount,
   currency,
   status,
+  Link,
+  to,
 }: Props): JSX.Element {
+  const linkRef = useRef<HTMLAnchorElement>(null)
+
   const formattedDueDate = intlDateTimeFormat.format(due)
 
   const currencyFormatter = new Intl.NumberFormat(undefined, {
@@ -32,14 +41,24 @@ export function InvoiceSummary({
     currency,
   })
   const formattedAmount = currencyFormatter.format(amount)
+
   const utilityClasses = ['surface', 'surface-1', 'radius-m']
   const blockClasses = ['invoice-summary']
   const className = clsx(utilityClasses, blockClasses)
 
+  const dragOrClickProps = useClickUnlessDrag({
+    minDragTime: 200,
+    onClick: () => {
+      linkRef.current?.click()
+    },
+  })
+
   return (
-    <article className={className}>
+    <article className={className} {...dragOrClickProps}>
       <h2 className="heading">
-        <InvoiceId id={id} />
+        <Link to={to} ref={linkRef}>
+          <InvoiceId id={id} />
+        </Link>
       </h2>
       <p className="name">{name}</p>
       <div className="due-amount">

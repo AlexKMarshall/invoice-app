@@ -1,17 +1,49 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react'
-import { ReactNode, useLayoutEffect } from 'react'
+import { ComponentProps, ReactNode } from 'react'
 
 import { InvoiceSummary } from '.'
-
-// import { ComponentProps, ReactNode, useLayoutEffect } from 'react'
+import { darkMode } from '~/storybook-helpers/dark-mode'
+import { forwardRef } from 'react'
 
 const meta: ComponentMeta<typeof InvoiceSummary> = {
   title: 'Components/InvoiceSummary',
+  includeStories: /^[A-Z]/,
   component: InvoiceSummary,
   argTypes: {},
 }
 
 export default meta
+type MockLinkProps = {
+  to: string
+  children: ReactNode
+}
+const MockLink = forwardRef<HTMLAnchorElement, MockLinkProps>(
+  ({ to, children }: MockLinkProps, ref) => {
+    return (
+      <a
+        href={to}
+        ref={ref}
+        onClick={(e) => {
+          e.preventDefault()
+        }}
+      >
+        {children}
+      </a>
+    )
+  }
+)
+MockLink.displayName = 'MockLink'
+
+export const defaultArgs: ComponentProps<typeof InvoiceSummary> = {
+  id: 'RT3080',
+  name: 'Jensen Huang',
+  due: new Date('19 Aug 2021'),
+  amount: 1800.9,
+  currency: 'GBP',
+  status: 'paid',
+  Link: MockLink,
+  to: '/some-path',
+}
 
 const Template: ComponentStory<typeof InvoiceSummary> = (args) => (
   <InvoiceSummary {...args} />
@@ -25,29 +57,12 @@ Default.args = {
   amount: 1800.9,
   currency: 'GBP',
   status: 'paid',
+  Link: MockLink,
+  to: '/some-path',
 }
 
 export const DefaultDarkMode = Template.bind({})
 DefaultDarkMode.args = {
   ...Default.args,
 }
-DefaultDarkMode.decorators = [
-  (Story) => (
-    <DarkMode>
-      <Story />
-    </DarkMode>
-  ),
-]
-
-function DarkMode({ children }: { children: ReactNode }) {
-  useLayoutEffect(() => {
-    const body = document.querySelector('body')
-    body?.setAttribute('data-theme', 'dark')
-
-    return () => {
-      body?.removeAttribute('data-theme')
-    }
-  }, [])
-
-  return <>{children}</>
-}
+DefaultDarkMode.decorators = [darkMode]

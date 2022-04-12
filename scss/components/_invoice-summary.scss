@@ -8,6 +8,26 @@
   align-items: center;
   justify-items: end;
   justify-content: space-between;
+  outline-width: 2px;
+  outline-style: solid;
+  outline-color: transparent;
+
+  transition: outline-color var(--transition-duration-fast) linear;
+
+  cursor: pointer;
+
+  &:focus-within,
+  &:hover {
+    outline-color: var(--color-primary);
+  }
+
+  & a:focus {
+    outline: none;
+  }
+
+  & a {
+    text-decoration: none;
+  }
 
   & .heading {
     justify-self: start;
