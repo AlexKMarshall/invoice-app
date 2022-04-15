@@ -1,0 +1,41 @@
+.input-field {
+  --stack-gap: var(--size-2);
+  --cluster-justify-content: space-between;
+  --outline-default-color: hsl(231deg 75% 93%);
+  --outline-focus-color: var(--color-primary-faded);
+
+  & .labels {
+    color: var(--foreground-color);
+  }
+
+  // could later be replaced with &:has( [aria-invalid]) to validate semantics
+  &[data-invalid] {
+    --foreground-color: var(--color-danger);
+    --outline-default-color: var(--color-danger);
+  }
+
+  &[data-readOnly] {
+    opacity: 50%;
+  }
+
+  [data-theme='dark'] &:not([data-invalid]) {
+    --outline-default-color: transparent;
+  }
+
+  & input {
+    border: none;
+
+    --foreground-color: var(--foreground-color-strong);
+    cursor: pointer;
+    caret-color: var(--color-primary);
+
+    outline-width: 1px;
+    outline-style: solid;
+    outline-color: var(--outline-default-color);
+    transition: outline-color var(--transition-duration-fast) linear;
+
+    &:focus-visible {
+      outline-color: var(--outline-focus-color);
+    }
+  }
+}

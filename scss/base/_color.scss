@@ -13,6 +13,8 @@ body {
   color: var(--foreground-color);
 
   --color-primary: hsl(253deg 94% 67%);
+  --color-primary-faded: hsl(252deg 100% 73%);
+  --color-danger: hsl(0deg 80% 63%);
 }
 
 [data-theme='light'] {

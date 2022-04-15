@@ -90,7 +90,7 @@ $color-schemes: (
   ),
   danger: (
     light: (
-      background: hsl(0deg 80% 63%),
+      background: var(--color-danger),
       text: hsl(253deg 0% 100%),
       hover: hsl(0deg 100% 80%),
     ),

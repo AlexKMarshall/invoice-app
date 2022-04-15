@@ -1,0 +1,15 @@
+@use '../abstracts/size' as *;
+
+@each $key, $value in $sizes {
+  .padding-#{$key} {
+    padding: $value;
+  }
+
+  .padding-block-#{$key} {
+    padding-block: $value;
+  }
+
+  .padding-inline-#{$key} {
+    padding-inline: $value;
+  }
+}
