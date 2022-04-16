@@ -1,10 +1,11 @@
 body {
-  --color-primary: hsl(253deg 94% 67%);
   --color-primary-faded: hsl(252deg 100% 73%);
-  --color-danger: hsl(0deg 80% 63%);
 }
 
 :root {
+  --color-primary: hsl(253deg 94% 67%);
+  --color-danger: hsl(0deg 80% 63%);
+
   --surface1-light: hsl(231deg 100% 100%);
   --surface2-light: hsl(240deg 27% 98%);
   --surface3-light: hsl(231deg 20% 27%);
