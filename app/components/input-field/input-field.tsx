@@ -28,7 +28,7 @@ export function InputField({
       </div>
       <input
         id={id}
-        className="surface surface-1 padding-block-4 padding-inline-5 radius-xs font-weight-bold"
+        className="surface1 text-strong padding-block-4 padding-inline-5 radius-xs font-weight-bold"
         aria-invalid={isInvalid || undefined}
         aria-errormessage={isInvalid ? errorMessageId : undefined}
         readOnly={readOnly}

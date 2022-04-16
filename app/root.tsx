@@ -1,17 +1,17 @@
 import {
-  json,
   Links,
   LiveReload,
   Meta,
   Outlet,
   Scripts,
   ScrollRestoration,
+  json,
 } from 'remix'
-import type { LinksFunction, MetaFunction, LoaderFunction } from 'remix'
+import type { LinksFunction, LoaderFunction, MetaFunction } from 'remix'
 
-import tailwindStylesheetUrl from './styles/tailwind.css'
-import sassStylesheetUrl from './styles/sass-output/main.css'
 import { getUser } from './session.server'
+import sassStylesheetUrl from './styles/sass-output/main.css'
+import tailwindStylesheetUrl from './styles/tailwind.css'
 
 export const links: LinksFunction = () => {
   return [
@@ -53,7 +53,7 @@ export default function App() {
         <Meta />
         <Links />
       </head>
-      <body className="h-full">
+      <body className="h-full surface4">
         <Outlet />
         <ScrollRestoration />
         <Scripts />

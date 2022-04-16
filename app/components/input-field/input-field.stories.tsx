@@ -19,6 +19,7 @@ export const Default = Template.bind({})
 Default.args = {
   label: 'Street Address',
   id: 'street-address',
+  defaultValue: '123 Main Street',
 }
 
 export const DefaultDarkMode = Template.bind({})

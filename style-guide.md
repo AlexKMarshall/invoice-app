@@ -328,6 +328,10 @@ very light grey hsl(240deg 27% 98%) -light mode background
   - hsl(240deg 27% 98%)
     - invoice line items in detail light mode
   - text hsl(231deg 36% 63%)
+- light surface 3
+  - hsl(231deg 20% 27%)
+    - invoice detail grand total light mode
+  - text white
 - dark surface 1
   - hsl(233deg 31% 17%)
     - invoice summary lines and invoice detail dark mode
@@ -339,10 +343,6 @@ very light grey hsl(240deg 27% 98%) -light mode background
 - dark surface 3
   - hsl(231deg 28% 7%)
     - invoice detail grand total dark mode
-  - text white
-- dark surface 4
-  - hsl(231deg 20% 27%)
-    - invoice detail grand total light mode
   - text white
 
 ### Buttons

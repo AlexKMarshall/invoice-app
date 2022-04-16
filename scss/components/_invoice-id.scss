@@ -6,6 +6,6 @@
   &::before {
     content: '#';
     font-weight: $font-weight-medium;
-    color: var(--foreground-color);
+    color: var(--text-default);
   }
 }
