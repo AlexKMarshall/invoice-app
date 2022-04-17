@@ -7,6 +7,11 @@ const meta: ComponentMeta<typeof InputField> = {
   title: 'Components/InputField',
   component: InputField,
   argTypes: {},
+  args: {
+    label: 'Street Address',
+    id: 'street-address',
+    defaultValue: '123 Main Street',
+  },
 }
 
 export default meta
@@ -16,21 +21,12 @@ const Template: ComponentStory<typeof InputField> = (args) => (
 )
 
 export const Default = Template.bind({})
-Default.args = {
-  label: 'Street Address',
-  id: 'street-address',
-  defaultValue: '123 Main Street',
-}
 
 export const DefaultDarkMode = Template.bind({})
-DefaultDarkMode.args = {
-  ...Default.args,
-}
 DefaultDarkMode.decorators = [darkMode]
 
 export const WithError = Template.bind({})
 WithError.args = {
-  ...Default.args,
   errorMessage: `Can't be empty`,
 }
 
@@ -42,9 +38,7 @@ WithErrorDarkMode.decorators = [darkMode]
 
 export const ReadOnly = Template.bind({})
 ReadOnly.args = {
-  ...Default.args,
   readOnly: true,
-  defaultValue: '123 Main Street',
 }
 
 export const ReadOnlyDarkMode = Template.bind({})
