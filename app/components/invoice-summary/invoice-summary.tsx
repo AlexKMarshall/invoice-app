@@ -1,16 +1,29 @@
+import {
+  ForwardRefExoticComponent,
+  ReactNode,
+  RefAttributes,
+  useRef,
+} from 'react'
+
 import { ArrowRightIcon } from '~/components/icons/arrow-right'
 import { InvoiceId } from '~/components/invoice-id'
-import { RemixLinkProps } from '@remix-run/react/components'
 import { StatusBadge } from '~/components/status-badge'
 import clsx from 'clsx'
 import useClickUnlessDrag from '~/hooks/use-click-unless-drag'
-import { useRef } from 'react'
 
 const intlDateTimeFormat = new Intl.DateTimeFormat(undefined, {
   day: '2-digit',
   month: 'short',
   year: 'numeric',
 })
+
+type LinkProps = {
+  className?: string
+  children: ReactNode
+}
+type Link = ForwardRefExoticComponent<
+  LinkProps & RefAttributes<HTMLAnchorElement>
+>
 
 type Props = {
   id: string
@@ -19,8 +32,7 @@ type Props = {
   amount: number
   currency: 'GBP'
   status: 'paid' | 'pending' | 'draft'
-  Link: any // cop-out until possible to mock Remix
-  to: RemixLinkProps['to']
+  Link: Link
 }
 export function InvoiceSummary({
   id,
@@ -30,7 +42,6 @@ export function InvoiceSummary({
   currency,
   status,
   Link,
-  to,
 }: Props): JSX.Element {
   const linkRef = useRef<HTMLAnchorElement>(null)
 
@@ -48,7 +59,10 @@ export function InvoiceSummary({
 
   const dragOrClickProps = useClickUnlessDrag({
     minDragTime: 200,
-    onClick: () => {
+    onClick: (e) => {
+      if (e.target instanceof Node && linkRef.current?.contains(e.target)) {
+        return // don't click again if we clicked on the link or its descendant
+      }
       linkRef.current?.click()
     },
   })
@@ -56,7 +70,7 @@ export function InvoiceSummary({
   return (
     <article className={className} {...dragOrClickProps}>
       <h2 className="heading">
-        <Link to={to} ref={linkRef}>
+        <Link ref={linkRef}>
           <InvoiceId id={id} />
         </Link>
       </h2>

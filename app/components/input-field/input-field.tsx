@@ -18,7 +18,7 @@ export function InputField({
     <div
       className="stack font-size-2 input-field"
       data-invalid={isInvalid || undefined}
-      data-readOnly={readOnly || undefined}
+      data-readonly={readOnly || undefined}
     >
       <div className="cluster labels">
         <label htmlFor={id}>{label}</label>

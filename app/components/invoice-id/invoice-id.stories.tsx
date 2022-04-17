@@ -6,6 +6,9 @@ const meta: ComponentMeta<typeof InvoiceId> = {
   title: 'Components/InvoiceId',
   component: InvoiceId,
   argTypes: {},
+  args: {
+    id: 'rt3080',
+  },
 }
 
 export default meta
@@ -15,6 +18,3 @@ const Template: ComponentStory<typeof InvoiceId> = (args) => (
 )
 
 export const Default = Template.bind({})
-Default.args = {
-  id: 'RT3080',
-}

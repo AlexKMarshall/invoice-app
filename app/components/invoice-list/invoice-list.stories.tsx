@@ -1,31 +1,38 @@
-import { ComponentMeta, ComponentStory } from '@storybook/react'
+import { ComponentMeta, ComponentStory, Meta } from '@storybook/react'
+import {
+  LinkActionWrapper,
+  buildLink,
+} from '~/storybook-helpers/storybook-link'
 
 import { ComponentProps } from 'react'
 import { InvoiceList } from '.'
 import { InvoiceSummary } from '../invoice-summary'
-import MockLink from '~/storybook-helpers/mock-link'
 import { darkMode } from '~/storybook-helpers/dark-mode'
 
-const meta: ComponentMeta<typeof InvoiceList> = {
+type InvoiceListGeneratorProps = ComponentProps<typeof InvoiceList> & {
+  items?: ComponentProps<typeof InvoiceSummary>[]
+} & ComponentProps<typeof LinkActionWrapper>
+
+const meta: Meta<InvoiceListGeneratorProps> = {
   title: 'Components/InvoiceList',
   component: InvoiceList,
-  argTypes: {},
+  argTypes: { onWouldNavigate: { action: true } },
 }
 
 export default meta
 
-type InvoiceListGeneratorProps = ComponentProps<typeof InvoiceList> & {
-  items?: ComponentProps<typeof InvoiceSummary>[]
-}
 const InvoiceListGenerator = ({
   items,
+  onWouldNavigate,
   ...args
 }: InvoiceListGeneratorProps) => (
-  <InvoiceList {...args}>
-    {items?.map((item) => (
-      <InvoiceSummary {...item} key={item.id} />
-    ))}
-  </InvoiceList>
+  <LinkActionWrapper onWouldNavigate={onWouldNavigate}>
+    <InvoiceList {...args}>
+      {items?.map((item) => (
+        <InvoiceSummary {...item} key={item.id} />
+      ))}
+    </InvoiceList>
+  </LinkActionWrapper>
 )
 
 const Template: ComponentStory<typeof InvoiceListGenerator> = (args) => (
@@ -42,8 +49,7 @@ OneItem.args = {
       amount: 1800.9,
       currency: 'GBP',
       status: 'paid',
-      Link: MockLink,
-      to: '/some-page',
+      Link: buildLink({ href: '/invoices/1' }),
     },
   ],
 }
@@ -58,8 +64,7 @@ MultipleItems.args = {
       amount: 1800.9,
       currency: 'GBP',
       status: 'paid',
-      Link: MockLink,
-      to: '/some-page',
+      Link: buildLink({ href: '/invoices/2' }),
     },
     {
       id: 'XM9141',
@@ -68,8 +73,7 @@ MultipleItems.args = {
       amount: 556,
       currency: 'GBP',
       status: 'pending',
-      Link: MockLink,
-      to: '/some-page',
+      Link: buildLink({ href: '/invoices/3' }),
     },
     {
       id: 'FV2353',
@@ -78,8 +82,7 @@ MultipleItems.args = {
       amount: 3102.04,
       currency: 'GBP',
       status: 'draft',
-      Link: MockLink,
-      to: '/some-page',
+      Link: buildLink({ href: '/invoices/4' }),
     },
   ],
 }

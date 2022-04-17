@@ -15,7 +15,7 @@
     --outline-default-color: var(--color-danger);
   }
 
-  &[data-readOnly] {
+  &[data-readonly] {
     opacity: 50%;
   }
 
