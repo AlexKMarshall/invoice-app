@@ -4,7 +4,7 @@ import { RemixLinkProps } from '@remix-run/react/components'
 import { StatusBadge } from '~/components/status-badge'
 import clsx from 'clsx'
 import useClickUnlessDrag from '~/hooks/use-click-unless-drag'
-import { useRef } from 'react'
+import { MouseEventHandler, useRef } from 'react'
 
 const intlDateTimeFormat = new Intl.DateTimeFormat(undefined, {
   day: '2-digit',
@@ -21,6 +21,7 @@ type Props = {
   status: 'paid' | 'pending' | 'draft'
   Link: any // cop-out until possible to mock Remix
   to: RemixLinkProps['to']
+  onClick?: MouseEventHandler
 }
 export function InvoiceSummary({
   id,
@@ -31,6 +32,7 @@ export function InvoiceSummary({
   status,
   Link,
   to,
+  onClick,
 }: Props): JSX.Element {
   const linkRef = useRef<HTMLAnchorElement>(null)
 
@@ -48,8 +50,9 @@ export function InvoiceSummary({
 
   const dragOrClickProps = useClickUnlessDrag({
     minDragTime: 200,
-    onClick: () => {
+    onClick: (e) => {
       linkRef.current?.click()
+      onClick?.(e)
     },
   })
 
