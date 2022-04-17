@@ -1,33 +1,44 @@
-import { ComponentMeta, ComponentStory } from '@storybook/react'
+import {
+  LinkActionWrapper,
+  buildLink,
+} from '~/storybook-helpers/storybook-link'
+import { Meta, Story } from '@storybook/react'
 import { userEvent, within } from '@storybook/testing-library'
 
+import { ComponentProps } from 'react'
 import { InvoiceSummary } from '.'
-import { buildLink } from '~/storybook-helpers/storybook-link'
 import { darkMode } from '~/storybook-helpers/dark-mode'
 import { expect } from '@storybook/jest'
 
-const meta: ComponentMeta<typeof InvoiceSummary> = {
+type StoryArgs = ComponentProps<typeof InvoiceSummary> &
+  ComponentProps<typeof LinkActionWrapper>
+
+const meta: Meta<StoryArgs> = {
   title: 'Components/InvoiceSummary',
   includeStories: /^[A-Z]/,
   component: InvoiceSummary,
   argTypes: {
-    onClick: { action: true },
+    onWouldNavigate: {
+      action: true,
+    },
   },
   args: {
-    id: 'RT3080',
+    id: 'rt3080',
     name: 'Jensen Huang',
     due: new Date('19 Aug 2021'),
     amount: 1800.9,
     currency: 'GBP',
     status: 'paid',
-    Link: buildLink({ href: '/some-path' }),
+    Link: buildLink({ href: '/invoices/rt3080' }),
   },
 }
 
 export default meta
 
-const Template: ComponentStory<typeof InvoiceSummary> = (args) => (
-  <InvoiceSummary {...args} />
+const Template: Story<StoryArgs> = ({ onWouldNavigate, ...args }) => (
+  <LinkActionWrapper onWouldNavigate={onWouldNavigate}>
+    <InvoiceSummary {...args} />
+  </LinkActionWrapper>
 )
 
 export const Default = Template.bind({})
@@ -40,13 +51,19 @@ ClickedLink.play = async ({ args, canvasElement }) => {
   const canvas = within(canvasElement)
   const link = await canvas.findByRole('link', { name: args.id })
   await userEvent.click(link)
-  await expect(args.onClick).toHaveBeenCalledTimes(1)
+  await expect(args.onWouldNavigate).toHaveBeenCalledTimes(1)
+  await expect(args.onWouldNavigate).toHaveBeenCalledWith(
+    `/invoices/${args.id}`
+  )
 }
 
-export const ClickedName = Template.bind({})
-ClickedName.play = async ({ args, canvasElement }) => {
+export const ClickedOutsideLink = Template.bind({})
+ClickedOutsideLink.play = async ({ args, canvasElement }) => {
   const canvas = within(canvasElement)
   const name = await canvas.findByText(args.name)
   await userEvent.click(name)
-  await expect(args.onClick).toHaveBeenCalledTimes(1)
+  await expect(args.onWouldNavigate).toHaveBeenCalledTimes(1)
+  await expect(args.onWouldNavigate).toHaveBeenCalledWith(
+    `/invoices/${args.id}`
+  )
 }

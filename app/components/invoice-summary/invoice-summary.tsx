@@ -1,15 +1,15 @@
+import {
+  ForwardRefExoticComponent,
+  ReactNode,
+  RefAttributes,
+  useRef,
+} from 'react'
+
 import { ArrowRightIcon } from '~/components/icons/arrow-right'
 import { InvoiceId } from '~/components/invoice-id'
 import { StatusBadge } from '~/components/status-badge'
 import clsx from 'clsx'
 import useClickUnlessDrag from '~/hooks/use-click-unless-drag'
-import {
-  ForwardRefExoticComponent,
-  MouseEventHandler,
-  ReactNode,
-  RefAttributes,
-  useRef,
-} from 'react'
 
 const intlDateTimeFormat = new Intl.DateTimeFormat(undefined, {
   day: '2-digit',
@@ -33,7 +33,6 @@ type Props = {
   currency: 'GBP'
   status: 'paid' | 'pending' | 'draft'
   Link: Link
-  onClick?: MouseEventHandler
 }
 export function InvoiceSummary({
   id,
@@ -43,7 +42,6 @@ export function InvoiceSummary({
   currency,
   status,
   Link,
-  onClick,
 }: Props): JSX.Element {
   const linkRef = useRef<HTMLAnchorElement>(null)
 
@@ -62,8 +60,10 @@ export function InvoiceSummary({
   const dragOrClickProps = useClickUnlessDrag({
     minDragTime: 200,
     onClick: (e) => {
+      if (e.target instanceof Node && linkRef.current?.contains(e.target)) {
+        return // don't click again if we clicked on the link or its descendant
+      }
       linkRef.current?.click()
-      onClick?.(e)
     },
   })
 
