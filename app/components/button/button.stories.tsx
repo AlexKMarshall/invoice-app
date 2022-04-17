@@ -12,7 +12,7 @@ const meta: ComponentMeta<typeof Button> = {
     onClick: { action: true },
   },
   args: {
-    label: 'Press me',
+    label: 'Press Me',
     color: 'primary',
   },
 }
