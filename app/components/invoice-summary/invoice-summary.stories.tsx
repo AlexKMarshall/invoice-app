@@ -2,7 +2,7 @@ import { ComponentMeta, ComponentStory } from '@storybook/react'
 import { userEvent, within } from '@storybook/testing-library'
 
 import { InvoiceSummary } from '.'
-import MockLink from '~/storybook-helpers/mock-link'
+import { buildLink } from '~/storybook-helpers/storybook-link'
 import { darkMode } from '~/storybook-helpers/dark-mode'
 import { expect } from '@storybook/jest'
 
@@ -20,8 +20,7 @@ const meta: ComponentMeta<typeof InvoiceSummary> = {
     amount: 1800.9,
     currency: 'GBP',
     status: 'paid',
-    Link: MockLink,
-    to: '/some-path',
+    Link: buildLink({ href: '/some-path' }),
   },
 }
 

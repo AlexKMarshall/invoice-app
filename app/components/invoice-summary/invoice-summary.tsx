@@ -1,16 +1,29 @@
 import { ArrowRightIcon } from '~/components/icons/arrow-right'
 import { InvoiceId } from '~/components/invoice-id'
-import { RemixLinkProps } from '@remix-run/react/components'
 import { StatusBadge } from '~/components/status-badge'
 import clsx from 'clsx'
 import useClickUnlessDrag from '~/hooks/use-click-unless-drag'
-import { MouseEventHandler, useRef } from 'react'
+import {
+  ForwardRefExoticComponent,
+  MouseEventHandler,
+  ReactNode,
+  RefAttributes,
+  useRef,
+} from 'react'
 
 const intlDateTimeFormat = new Intl.DateTimeFormat(undefined, {
   day: '2-digit',
   month: 'short',
   year: 'numeric',
 })
+
+type LinkProps = {
+  className?: string
+  children: ReactNode
+}
+type Link = ForwardRefExoticComponent<
+  LinkProps & RefAttributes<HTMLAnchorElement>
+>
 
 type Props = {
   id: string
@@ -19,8 +32,7 @@ type Props = {
   amount: number
   currency: 'GBP'
   status: 'paid' | 'pending' | 'draft'
-  Link: any // cop-out until possible to mock Remix
-  to: RemixLinkProps['to']
+  Link: Link
   onClick?: MouseEventHandler
 }
 export function InvoiceSummary({
@@ -31,7 +43,6 @@ export function InvoiceSummary({
   currency,
   status,
   Link,
-  to,
   onClick,
 }: Props): JSX.Element {
   const linkRef = useRef<HTMLAnchorElement>(null)
@@ -59,7 +70,7 @@ export function InvoiceSummary({
   return (
     <article className={className} {...dragOrClickProps}>
       <h2 className="heading">
-        <Link to={to} ref={linkRef}>
+        <Link ref={linkRef}>
           <InvoiceId id={id} />
         </Link>
       </h2>
