@@ -56,6 +56,9 @@ ClickedLink.play = async ({ args, canvasElement }) => {
     `/invoices/${args.id}`
   )
 }
+ClickedLink.parameters = {
+  chromatic: { viewports: [375] },
+}
 
 export const ClickedOutsideLink = Template.bind({})
 ClickedOutsideLink.play = async ({ args, canvasElement }) => {
@@ -66,4 +69,7 @@ ClickedOutsideLink.play = async ({ args, canvasElement }) => {
   await expect(args.onWouldNavigate).toHaveBeenCalledWith(
     `/invoices/${args.id}`
   )
+}
+ClickedOutsideLink.parameters = {
+  chromatic: { viewports: [375] },
 }
