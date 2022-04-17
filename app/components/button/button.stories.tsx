@@ -1,5 +1,5 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react'
-import { findByRole, userEvent, within } from '@storybook/testing-library'
+import { userEvent, within } from '@storybook/testing-library'
 
 import { Button } from '.'
 import { darkMode } from '~/storybook-helpers/dark-mode'
