@@ -1,31 +1,38 @@
-import { ComponentMeta, ComponentStory } from '@storybook/react'
+import { ComponentMeta, ComponentStory, Meta } from '@storybook/react'
+import {
+  LinkActionWrapper,
+  buildLink,
+} from '~/storybook-helpers/storybook-link'
 
 import { ComponentProps } from 'react'
 import { InvoiceList } from '.'
 import { InvoiceSummary } from '../invoice-summary'
-import { buildLink } from '~/storybook-helpers/storybook-link'
 import { darkMode } from '~/storybook-helpers/dark-mode'
 
-const meta: ComponentMeta<typeof InvoiceList> = {
+type InvoiceListGeneratorProps = ComponentProps<typeof InvoiceList> & {
+  items?: ComponentProps<typeof InvoiceSummary>[]
+} & ComponentProps<typeof LinkActionWrapper>
+
+const meta: Meta<InvoiceListGeneratorProps> = {
   title: 'Components/InvoiceList',
   component: InvoiceList,
-  argTypes: {},
+  argTypes: { onWouldNavigate: { action: true } },
 }
 
 export default meta
 
-type InvoiceListGeneratorProps = ComponentProps<typeof InvoiceList> & {
-  items?: ComponentProps<typeof InvoiceSummary>[]
-}
 const InvoiceListGenerator = ({
   items,
+  onWouldNavigate,
   ...args
 }: InvoiceListGeneratorProps) => (
-  <InvoiceList {...args}>
-    {items?.map((item) => (
-      <InvoiceSummary {...item} key={item.id} />
-    ))}
-  </InvoiceList>
+  <LinkActionWrapper onWouldNavigate={onWouldNavigate}>
+    <InvoiceList {...args}>
+      {items?.map((item) => (
+        <InvoiceSummary {...item} key={item.id} />
+      ))}
+    </InvoiceList>
+  </LinkActionWrapper>
 )
 
 const Template: ComponentStory<typeof InvoiceListGenerator> = (args) => (
