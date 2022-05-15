@@ -16,8 +16,13 @@
 
   cursor: pointer;
 
-  &:focus-within,
-  &:hover {
+  @media (hover: hover) {
+    &:hover {
+      outline-color: var(--color-primary);
+    }
+  }
+
+  &:focus-within {
     outline-color: var(--color-primary);
   }
 

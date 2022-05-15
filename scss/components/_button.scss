@@ -6,6 +6,14 @@
   padding-block: var(--size-4);
   padding-inline: var(--size-6);
 
+  --touch-target: 44px;
+  min-width: var(--touch-target);
+  min-height: var(--touch-target);
+
+  @media (pointer: fine) {
+    --touch-target: 0;
+  }
+
   border: none;
 
   cursor: pointer;
@@ -37,12 +45,18 @@
     outline-offset var(--transition-duration-space)
       var(--transition-timing-space);
 
-  &:hover,
-  &:focus-visible {
-    background-color: var(--button-hover);
+  @media (hover: hover) {
+    &:hover {
+      background-color: var(--button-hover);
+    }
+  }
+
+  &:active {
+    filter: brightness(0.9);
   }
 
   &:focus-visible {
+    background-color: var(--button-hover);
     outline-width: 3px;
     outline-style: solid;
     outline-color: var(--button-hover);

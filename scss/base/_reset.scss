@@ -3,6 +3,7 @@
 *::before,
 *::after {
   box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
 }
 
 /* Remove default margin */
@@ -15,7 +16,8 @@ p,
 figure,
 blockquote,
 dl,
-dd {
+dd,
+fieldset {
   margin: 0;
 }
 
@@ -55,6 +57,12 @@ button,
 textarea,
 select {
   font: inherit;
+}
+
+/* Remove border and padding from fieldset */
+fieldset {
+  border: none;
+  padding: 0;
 }
 
 /* Remove all animations, transitions and smooth scroll for people that prefer not to see them */
