@@ -1,36 +1,31 @@
-@keyframes fade-in {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
+@use '../abstracts/media-queries' as *;
 
-@keyframes fade-out {
-  from {
-    opacity: 1;
-  }
-  to {
-    opacity: 0;
-  }
-}
+.filter-menu-trigger {
+  border: none;
+  background-color: transparent;
+  padding: 0;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: baseline;
+  gap: 1.25em;
 
-@keyframes expand {
-  from {
-    transform: scale(0);
-  }
-  to {
-    transform: scale(1);
-  }
-}
+  outline-color: transparent;
+  outline-offset: max(4px, 0.15em);
+  outline-width: max(2px, 0.15em);
+  outline-style: solid;
 
-@keyframes collapse {
-  from {
-    transform: scale(1);
+  transition: outline var(--transition-duration-fast) ease-in-out;
+
+  &:focus-visible {
+    outline-color: currentColor;
   }
-  to {
-    transform: scale(0);
+
+  & .mobile-hidden {
+    display: none;
+
+    @include small {
+      display: initial;
+    }
   }
 }
 
@@ -83,5 +78,41 @@
       animation-duration: var(--transition-duration-fast);
       animation-timing-function: ease-in-out;
     }
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fade-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes expand {
+  from {
+    transform: scale(0);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+@keyframes collapse {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(0);
   }
 }
