@@ -1,14 +1,23 @@
 import { InputHTMLAttributes, ReactNode } from 'react'
 
-type Props = { label: ReactNode } & Omit<
+import { useCheckboxGroup } from '../checkbox-group'
+
+type Props = { children: ReactNode } & Omit<
   InputHTMLAttributes<HTMLInputElement>,
   'className' | 'type'
 >
-export function Checkbox({ label, ...props }: Props): JSX.Element {
+export function Checkbox({
+  children,
+  name: nameOverride,
+  ...props
+}: Props): JSX.Element {
+  const checkboxGroup = useCheckboxGroup()
+  const name = nameOverride ?? checkboxGroup?.name
+
   return (
     <label className="checkbox text-strong">
-      <input type="checkbox" {...props} />
-      {label}
+      <input type="checkbox" name={name} {...props} />
+      {children}
     </label>
   )
 }

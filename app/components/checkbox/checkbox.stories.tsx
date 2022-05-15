@@ -7,7 +7,7 @@ const meta: ComponentMeta<typeof Checkbox> = {
   title: 'Components/Checkbox',
   component: Checkbox,
   args: {
-    label: 'My Checkbox',
+    children: 'My Checkbox',
   },
 }
 
