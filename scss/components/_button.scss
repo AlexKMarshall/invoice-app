@@ -45,12 +45,14 @@
     outline-offset var(--transition-duration-space)
       var(--transition-timing-space);
 
-  &:hover,
-  &:focus-visible {
-    background-color: var(--button-hover);
+  @media (hover: hover) {
+    &:hover {
+      background-color: var(--button-hover);
+    }
   }
 
   &:focus-visible {
+    background-color: var(--button-hover);
     outline-width: 3px;
     outline-style: solid;
     outline-color: var(--button-hover);
