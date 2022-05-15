@@ -66,8 +66,10 @@
       transform: scale(1);
     }
 
-    &:hover {
-      border-color: var(--checkbox-border-color);
+    @media (hover: hover) {
+      &:hover {
+        border-color: var(--checkbox-border-color);
+      }
     }
 
     &:focus-visible {
