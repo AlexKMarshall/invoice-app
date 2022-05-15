@@ -1,13 +1,14 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react'
-import { userEvent, within } from '@storybook/testing-library'
 
 import { FilterMenu } from '.'
 import { darkMode } from '~/storybook-helpers/dark-mode'
-import { expect } from '@storybook/jest'
 
 const meta: ComponentMeta<typeof FilterMenu> = {
   title: 'Components/FilterMenu',
   component: FilterMenu,
+  args: {
+    Form: (props) => <form {...props} />,
+  },
 }
 
 export default meta

@@ -3,9 +3,17 @@ import * as Popover from '@radix-ui/react-popover'
 import { ArrowDownIcon } from '../icons/arrow-down'
 import { Checkbox } from '../checkbox'
 import { CheckboxGroup } from '../checkbox-group'
+import { ReactNode } from 'react'
 
-type Props = {}
-export function FilterMenu(props: Props): JSX.Element {
+type FormProps = {
+  children: ReactNode
+}
+type Form = React.FC<FormProps>
+
+type Props = {
+  Form: Form
+}
+export function FilterMenu({ Form }: Props): JSX.Element {
   return (
     <Popover.Root>
       <Popover.Trigger className="text-strong font-weight-bold radius-xs filter-menu-trigger">
@@ -18,13 +26,13 @@ export function FilterMenu(props: Props): JSX.Element {
         className="surface5 radius-m padding-6 font-weight-bold filter-menu-content"
         sideOffset={20}
       >
-        <form>
-          <CheckboxGroup name="status-filter">
+        <Form>
+          <CheckboxGroup name="status">
             <Checkbox value="draft">Draft</Checkbox>
             <Checkbox value="pending">Pending</Checkbox>
             <Checkbox value="paid">Paid</Checkbox>
           </CheckboxGroup>
-        </form>
+        </Form>
       </Popover.Content>
     </Popover.Root>
   )
