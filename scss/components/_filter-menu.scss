@@ -1,0 +1,87 @@
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fade-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes expand {
+  from {
+    transform: scale(0);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+@keyframes collapse {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(0);
+  }
+}
+
+.filter-menu-content {
+  min-width: 12rem;
+  width: fit-content;
+
+  --shadow-color: hsla(232deg 38% 45% / 0.25);
+  [data-theme='dark'] & {
+    --shadow-color: hsla(0deg 0% 0% / 0.25);
+  }
+
+  box-shadow: 0px 10px 20px var(--shadow-color);
+
+  transform-origin: var(--radix-popover-content-transform-origin);
+  transform: scale(0);
+  opacity: 0;
+
+  & > * {
+    opacity: 0;
+  }
+
+  &[data-state='open'] {
+    animation-fill-mode: forwards;
+    animation-name: fade-in, expand;
+    animation-duration: var(--transition-duration-fast);
+    animation-timing-function: ease-in-out;
+
+    & > * {
+      animation-fill-mode: forwards;
+      animation-name: fade-in;
+      animation-duration: var(--transition-duration-fast);
+      animation-delay: calc(var(--transition-duration-fast) * 0.75);
+      animation-timing-function: ease-in-out;
+    }
+  }
+
+  &[data-state='closed'] {
+    opacity: 1;
+    transform: scale(1);
+    animation-fill-mode: forwards;
+    animation-name: fade-out, collapse;
+    animation-duration: var(--transition-duration-fast);
+    animation-timing-function: ease-in-out;
+    animation-delay: calc(var(--transition-duration-fast) * 0.75);
+
+    & > * {
+      animation-fill-mode: forwards;
+      animation-name: fade-out;
+      animation-duration: var(--transition-duration-fast);
+      animation-timing-function: ease-in-out;
+    }
+  }
+}

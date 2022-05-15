@@ -4,6 +4,10 @@
   gap: 1em;
   cursor: pointer;
 
+  & + & {
+    margin-top: var(--size-3);
+  }
+
   --checkbox-unchecked-background: hsl(231deg 73% 93%);
   --checkbox-checked-background: var(--color-primary);
   --checkbox-border-color: var(--checkbox-checked-background);
@@ -15,7 +19,6 @@
   & input[type='checkbox'] {
     appearance: none;
     margin: 0;
-    font: inherit;
     color: currentColor;
     width: 1.15em;
     height: 1.15em;
