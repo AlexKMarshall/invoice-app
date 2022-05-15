@@ -51,6 +51,10 @@
     }
   }
 
+  &:active {
+    filter: brightness(0.9);
+  }
+
   &:focus-visible {
     background-color: var(--button-hover);
     outline-width: 3px;
