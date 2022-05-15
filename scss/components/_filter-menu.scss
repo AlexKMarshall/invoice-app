@@ -6,8 +6,16 @@
   padding: 0;
   cursor: pointer;
   display: inline-flex;
-  align-items: baseline;
+  align-items: center;
   gap: 1.25em;
+
+  --touch-target: 44px;
+  min-width: var(--touch-target);
+  min-height: var(--touch-target);
+
+  @media (pointer: fine) {
+    --touch-target: 0;
+  }
 
   outline-color: transparent;
   outline-offset: max(4px, 0.15em);
