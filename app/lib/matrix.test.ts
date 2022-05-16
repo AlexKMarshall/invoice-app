@@ -1,4 +1,4 @@
-import { Matrix, movePosition } from './matrix'
+import { Matrix, getElement, map, movePosition, setElement } from './matrix'
 
 describe('movePosition', () => {
   test('should move stepwise', () => {
@@ -41,5 +41,55 @@ describe('movePosition', () => {
     ]
 
     expect(movePosition(sourceMatrix, [0, 0], 'down')).toEqual([2, 0])
+  })
+})
+
+describe('map', () => {
+  test('returns a mapped matrix', () => {
+    const matrix = [
+      [-4, 2],
+      [7, 0],
+    ]
+    expect(map(matrix, (el) => (el > 0 ? 1 : el < 0 ? -1 : 0))).toEqual([
+      [-1, 1],
+      [1, 0],
+    ])
+  })
+})
+
+describe('getElement', () => {
+  test('returns element at given coordinates', () => {
+    const matrix = [
+      [1, 2],
+      [3, 4],
+    ]
+    expect(getElement(matrix, [1, 0])).toBe(3)
+  })
+  test('returns null if coordinates not in matrix', () => {
+    const matrix = [
+      [1, 2],
+      [3, 4],
+    ]
+    expect(getElement(matrix, [5, 2])).toBe(null)
+  })
+})
+
+describe('setElement', () => {
+  test('mutates matrix with element at coordinates', () => {
+    const matrix = [
+      [1, 2],
+      [3, 4],
+    ]
+    setElement(matrix, [0, 1], 9)
+    expect(matrix).toEqual([
+      [1, 9],
+      [3, 4],
+    ])
+  })
+  test('can insert into empty matrix', () => {
+    const matrix: Matrix<number> = []
+    setElement(matrix, [1, 1], 9)
+    // eslint-disable-next-line no-sparse-arrays
+    expect(matrix).toEqual([, [, 9]])
   })
 })

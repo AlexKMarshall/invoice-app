@@ -1,8 +1,8 @@
 /** 2-dimensional matrix of values */
 export type Matrix<T = unknown> = T[][]
 /** [Y-Axis position, X-Axis position], alternatively [Row-index, Column-index] */
-type Coordinates = [number, number]
-type Move = 'up' | 'down' | 'left' | 'right'
+export type Coordinates = [number, number]
+export type Move = 'up' | 'down' | 'left' | 'right'
 
 const moveOffset: Record<Move, Coordinates> = {
   up: [-1, 0],
@@ -42,4 +42,33 @@ export const movePosition = (
 
 const clamp = (min: number, target: number, max: number): number => {
   return Math.min(Math.max(target, min), max)
+}
+
+export const map = <T, U>(
+  matrix: Matrix<T>,
+  transformFn: (el: T, coordinates: Coordinates, matrix: Matrix<T>) => U
+): Matrix<U> => {
+  return matrix.map((row, rowIndex) =>
+    row.map((element, columnIndex) =>
+      transformFn(element, [rowIndex, columnIndex], matrix)
+    )
+  )
+}
+
+export const getElement = <T>(
+  matrix: Matrix<T>,
+  coordinates: Coordinates
+): T | null => {
+  const [rowIndex, colIndex] = coordinates
+  return matrix[rowIndex]?.[colIndex] ?? null
+}
+
+export const setElement = <T>(
+  matrix: Matrix<T>,
+  [rowIndex, columnIndex]: Coordinates,
+  element: T
+) => {
+  const row = matrix[rowIndex] ?? []
+  row[columnIndex] = element
+  matrix[rowIndex] = row
 }
