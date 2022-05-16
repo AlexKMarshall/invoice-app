@@ -1,9 +1,11 @@
 import {
   ButtonHTMLAttributes,
+  Dispatch,
   EventHandler,
   KeyboardEventHandler,
   ReactNode,
   RefObject,
+  SetStateAction,
   SyntheticEvent,
   useCallback,
   useEffect,
@@ -67,7 +69,7 @@ export function InteractiveGrid(props: Props): JSX.Element {
   const moveFocus = (move: Move) => {
     const newPosition = movePosition(matrix, rovingFocusStop, move)
     if (!newPosition) return
-    // const refToFocus = getElement(matrix, newPosition)?.ref
+
     const refToFocus = getElement(refsMatrix.current, newPosition)
     refToFocus?.current?.focus()
     setRovingFocusStop(newPosition)
@@ -93,22 +95,6 @@ export function InteractiveGrid(props: Props): JSX.Element {
     role: 'columnheader',
   })
 
-  const getCellProps: GetCellPropsFn = ({
-    ref,
-    coordinates,
-    onClick,
-    ...props
-  }) => ({
-    ...props,
-    role: 'gridcell',
-    ref,
-    tabIndex: isCurrentRovingFocus(rovingFocusStop, coordinates) ? 0 : -1,
-    onClick: callAllEventHandlers(
-      () => setRovingFocusStop(coordinates),
-      onClick
-    ),
-  })
-
   return (
     <div
       style={{
@@ -129,24 +115,10 @@ export function InteractiveGrid(props: Props): JSX.Element {
       {matrix.map((row, rowIndex) => (
         <div key={rowIndex} style={{ display: 'contents' }} {...getRowProps()}>
           {row.map((cell, columnIndex) => (
-            // <button
-            //   key={columnIndex}
-            //   {...getCellProps({
-            //     style: {
-            //       minWidth: 44,
-            //       minHeight: 44,
-            //       display: 'grid',
-            //       placeContent: 'center',
-            //     },
-            //     ref: cell.ref,
-            //     coordinates: [rowIndex, columnIndex],
-            //   })}
-            // >
-            //   {cell.item}
-            // </button>
             <GridCell
               key={columnIndex}
-              getCellProps={getCellProps}
+              rovingFocusStop={rovingFocusStop}
+              setRovingFocusStop={setRovingFocusStop}
               coordinates={[rowIndex, columnIndex]}
               registerRef={registerRef}
             >
@@ -160,15 +132,13 @@ export function InteractiveGrid(props: Props): JSX.Element {
 }
 
 type GetCellPropsFn = (
-  props: {
-    ref: RefObject<HTMLButtonElement>
-    coordinates: Coordinates
-  } & ButtonHTMLAttributes<HTMLButtonElement>
+  props: ButtonHTMLAttributes<HTMLButtonElement>
 ) => ButtonHTMLAttributes<HTMLButtonElement>
 
 type GridCellProps = {
   coordinates: Coordinates
-  getCellProps: GetCellPropsFn
+  rovingFocusStop: Coordinates
+  setRovingFocusStop: Dispatch<SetStateAction<Coordinates>>
   registerRef: (
     ref: RefObject<HTMLButtonElement>,
     coordinates: Coordinates
@@ -177,16 +147,21 @@ type GridCellProps = {
 }
 function GridCell({
   coordinates,
-  getCellProps,
   registerRef,
+  rovingFocusStop,
+  setRovingFocusStop,
   children,
 }: GridCellProps) {
   const [rowIndex, columnIndex] = coordinates
   const ref = useRef<HTMLButtonElement>(null)
 
-  useEffect(() => {
-    registerRef(ref, [rowIndex, columnIndex])
-  }, [columnIndex, registerRef, rowIndex])
+  const { getCellProps } = useGridCell({
+    coordinates,
+    rovingFocusStop,
+    setRovingFocusStop,
+    registerRef,
+    ref,
+  })
 
   return (
     <button
@@ -198,8 +173,6 @@ function GridCell({
           display: 'grid',
           placeContent: 'center',
         },
-        ref: ref,
-        coordinates: [rowIndex, columnIndex],
       })}
     >
       {children}
@@ -229,3 +202,40 @@ const callAllEventHandlers =
   (event: E) => {
     handlers.forEach((handler) => handler?.(event))
   }
+
+type UseGridCellProps = {
+  coordinates: Coordinates
+  rovingFocusStop: Coordinates
+  setRovingFocusStop: Dispatch<SetStateAction<Coordinates>>
+  registerRef: (
+    ref: RefObject<HTMLButtonElement>,
+    coordinates: Coordinates
+  ) => void
+  ref: RefObject<HTMLButtonElement>
+}
+const useGridCell = ({
+  coordinates,
+  rovingFocusStop,
+  setRovingFocusStop,
+  registerRef,
+  ref,
+}: UseGridCellProps) => {
+  const [rowIndex, columnIndex] = coordinates
+
+  useEffect(() => {
+    registerRef(ref, [rowIndex, columnIndex])
+  }, [columnIndex, ref, registerRef, rowIndex])
+
+  const getCellProps: GetCellPropsFn = ({ onClick, ...props }) => ({
+    ...props,
+    role: 'gridcell',
+    ref,
+    tabIndex: isCurrentRovingFocus(rovingFocusStop, coordinates) ? 0 : -1,
+    onClick: callAllEventHandlers(
+      () => setRovingFocusStop(coordinates),
+      onClick
+    ),
+  })
+
+  return { getCellProps }
+}
