@@ -4,6 +4,35 @@ export type Matrix<T = unknown> = T[][]
 export type Coordinates = [number, number]
 export type Move = 'up' | 'down' | 'left' | 'right'
 
+const buildEmptyMatrix = ({
+  rows,
+  columns,
+}: {
+  rows: number
+  columns: number
+}): Matrix<null> =>
+  Array.from({ length: rows }, () =>
+    Array.from({ length: columns }, () => null)
+  )
+
+const getLinearIndex = (
+  columnCount: number,
+  coordinates: Coordinates
+): number => {
+  const [rowIndex, columnIndex] = coordinates
+  return rowIndex * columnCount + columnIndex
+}
+
+export const toMatrix = <T>(array: T[], columnCount: number): Matrix<T> => {
+  const rowCount = Math.ceil(array.length / columnCount)
+  const emptyMatrix = buildEmptyMatrix({ rows: rowCount, columns: columnCount })
+
+  return map(emptyMatrix, (el, coordinates) => {
+    const linearIndex = getLinearIndex(columnCount, coordinates)
+    return array[linearIndex]
+  })
+}
+
 const moveOffset: Record<Move, Coordinates> = {
   up: [-1, 0],
   down: [1, 0],
