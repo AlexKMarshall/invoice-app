@@ -1,4 +1,4 @@
-import { ButtonHTMLAttributes, useRef } from 'react'
+import { ButtonHTMLAttributes, ComponentProps, useRef } from 'react'
 import { render, screen } from '@testing-library/react'
 
 import { Coordinates } from '~/lib/matrix'
@@ -6,37 +6,39 @@ import { InteractiveGrid } from '.'
 import { useGridCellContent } from './cell-content'
 import userEvent from '@testing-library/user-event'
 
+type UIProps = ComponentProps<typeof InteractiveGrid>
+const UI = ({ matrix, ...props }: UIProps) => (
+  <div>
+    <button>Before</button>
+    <InteractiveGrid matrix={matrix} {...props}>
+      <InteractiveGrid.Row>
+        <InteractiveGrid.ColumnHeader>A</InteractiveGrid.ColumnHeader>
+        <InteractiveGrid.ColumnHeader>B</InteractiveGrid.ColumnHeader>
+      </InteractiveGrid.Row>
+      {matrix.map((row, rowIndex) => (
+        <InteractiveGrid.Row key={rowIndex}>
+          {row.map((cell, columnIndex) => (
+            <InteractiveGrid.Cell key={columnIndex}>
+              <CustomButton coordinates={[rowIndex, columnIndex]}>
+                {cell as any}
+              </CustomButton>
+            </InteractiveGrid.Cell>
+          ))}
+        </InteractiveGrid.Row>
+      ))}
+    </InteractiveGrid>
+    <button>After</button>
+  </div>
+)
+
 describe('<InteractiveGrid/>', () => {
   test('focus management', async () => {
     const matrix = [
       [1, 2],
       [3, 4],
     ]
-    const Ui = () => (
-      <>
-        <button>Before</button>
-        <InteractiveGrid matrix={matrix}>
-          <InteractiveGrid.Row>
-            <InteractiveGrid.ColumnHeader>A</InteractiveGrid.ColumnHeader>
-            <InteractiveGrid.ColumnHeader>B</InteractiveGrid.ColumnHeader>
-          </InteractiveGrid.Row>
-          {matrix.map((row, rowIndex) => (
-            <InteractiveGrid.Row key={rowIndex}>
-              {row.map((cell, columnIndex) => (
-                <InteractiveGrid.Cell key={columnIndex}>
-                  <CustomButton coordinates={[rowIndex, columnIndex]}>
-                    {cell}
-                  </CustomButton>
-                </InteractiveGrid.Cell>
-              ))}
-            </InteractiveGrid.Row>
-          ))}
-        </InteractiveGrid>
-        <button>After</button>
-      </>
-    )
 
-    render(<Ui />)
+    render(<UI matrix={matrix} />)
     const before = screen.getByRole('button', { name: /before/i })
     const button1 = screen.getByRole('button', { name: /1/i })
     const button2 = screen.getByRole('button', { name: /2/i })

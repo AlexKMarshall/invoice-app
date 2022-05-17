@@ -27,13 +27,15 @@ type GetGridPropsFn = (
 
 type Props<T extends unknown> = {
   matrix: Matrix<T>
+  defaultFocusStop?: Coordinates
 } & Omit<HTMLAttributes<HTMLDivElement>, 'role'>
 export function InteractiveGrid<T extends unknown>({
   matrix,
+  defaultFocusStop,
   ...props
 }: Props<T>): JSX.Element {
   const { registerRef, getGridProps, rovingFocusStop, setRovingFocusStop } =
-    useGridWrapper(matrix)
+    useGridWrapper({ matrix, defaultFocusStop })
 
   return (
     <Provider value={{ rovingFocusStop, registerRef, setRovingFocusStop }}>
@@ -53,7 +55,11 @@ const keyMoveMap: Record<string, Move | undefined> = {
   ArrowRight: 'right',
 }
 
-const useGridWrapper = (matrix: Matrix) => {
+type UseGridWrapperProps = {
+  matrix: Matrix
+  defaultFocusStop?: Coordinates
+}
+const useGridWrapper = ({ matrix, defaultFocusStop }: UseGridWrapperProps) => {
   const refsMatrix = useRef<Matrix<RefObject<HTMLButtonElement> | undefined>>(
     []
   )
@@ -65,7 +71,9 @@ const useGridWrapper = (matrix: Matrix) => {
     []
   )
 
-  const [rovingFocusStop, setRovingFocusStop] = useState<Coordinates>([0, 0])
+  const [rovingFocusStop, setRovingFocusStop] = useState<Coordinates>(
+    defaultFocusStop ?? [0, 0]
+  )
 
   const moveFocus = (move: Move) => {
     const newPosition = movePosition(matrix, rovingFocusStop, move)
