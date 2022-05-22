@@ -1,0 +1,11 @@
+@use '../abstracts/size' as *;
+
+@each $key, $value in $sizes {
+  .width-#{$key} {
+    height: $value;
+  }
+
+  .height-#{$key} {
+    height: $value;
+  }
+}

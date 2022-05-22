@@ -1,0 +1,33 @@
+.icon-button {
+  display: grid;
+  place-items: center;
+  aspect-ratio: 1 / 1;
+
+  background-color: transparent;
+  border: none;
+  padding: var(--size-2);
+  color: var(--color-primary);
+
+  outline-color: transparent;
+  outline-offset: 0px;
+  outline-style: solid;
+
+  transition: outline-color var(--transition-duration-medium) linear,
+    outline-offset var(--transition-duration-fast) ease-in-out,
+    transform var(--transition-duration-fast) ease-in-out;
+
+  transform-origin: center;
+
+  &:hover {
+    transform: scale(1.2);
+  }
+  &:active {
+    transform: scale(0.9);
+  }
+
+  &:focus-visible {
+    outline-width: 3px;
+    outline-color: var(--color-primary);
+    outline-offset: clamp(2px, 25%, 4px);
+  }
+}

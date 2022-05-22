@@ -1,7 +1,7 @@
 import { createIcon } from '~/components/icon'
 
 export const ArrowRightIcon = createIcon(
-  <path d="M1 1l4 4-4 4" strokeWidth="2" />,
+  <path d="M1.5 1l4 4-4 4" strokeWidth="2" />,
   'ArrowRightIcon',
   '0 0 7 10',
   'stroke'

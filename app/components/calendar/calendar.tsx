@@ -1,4 +1,9 @@
-import clsx from 'clsx'
+import { ButtonHTMLAttributes, useRef } from 'react'
+import { Coordinates, toMatrix } from '~/lib/matrix'
+import {
+  InteractiveGrid,
+  useGridCellContent,
+} from '~/components/interactive-grid'
 import {
   eachDayOfInterval,
   endOfMonth,
@@ -10,16 +15,14 @@ import {
   startOfToday,
   startOfWeek,
 } from 'date-fns'
-import { ButtonHTMLAttributes, useRef } from 'react'
 
-import {
-  InteractiveGrid,
-  useGridCellContent,
-} from '~/components/interactive-grid'
-import { Coordinates, toMatrix } from '~/lib/matrix'
+import clsx from 'clsx'
+import { IconButton } from '../icon-button'
+import { ArrowLeftIcon } from '../icons/arrow-left'
+import { ArrowRightIcon } from '../icons/arrow-right'
 
-type Props = {}
-export function Calendar(props: Props): JSX.Element {
+type Props = { id: string }
+export function Calendar({ id, ...props }: Props): JSX.Element {
   const today = startOfToday()
   const daysOfMonth = eachDayOfInterval({
     start: startOfWeek(startOfMonth(today)),
@@ -27,39 +30,61 @@ export function Calendar(props: Props): JSX.Element {
   })
   const daysMatrix = toMatrix(daysOfMonth, 7)
 
+  const labelId = `${id}-label`
+
   return (
-    <InteractiveGrid matrix={daysMatrix} className="calendar">
-      <InteractiveGrid.Row>
-        {weekHeaders.map((day) => (
-          <InteractiveGrid.ColumnHeader key={day.label}>
-            {day.display}
-          </InteractiveGrid.ColumnHeader>
-        ))}
-      </InteractiveGrid.Row>
-      {daysMatrix.map((row, rowIndex) => (
-        <InteractiveGrid.Row key={rowIndex}>
-          {row.map((day, columnIndex) => (
-            <InteractiveGrid.Cell
-              key={columnIndex}
-              className="cell"
-              aria-selected={isSameDay(today, day)}
-            >
-              <Day
-                coordinates={[rowIndex, columnIndex]}
-                className={clsx(
-                  'touch-target font-weight-bold day',
-                  isSameMonth(day, today) ? 'text-strong' : null
-                )}
-              >
-                <time dateTime={format(day, 'yyyy-mm-dd')}>
-                  {format(day, 'd')}
-                </time>
-              </Day>
-            </InteractiveGrid.Cell>
+    <div className="stack calendar">
+      <div className="header">
+        <IconButton
+          icon={<ArrowLeftIcon className="width-3" />}
+          label="Previous month"
+        />
+        <div id={labelId} className="text-strong font-weight-bold">
+          {format(today, 'MMM yyyy')}
+        </div>
+        <IconButton
+          icon={<ArrowRightIcon className="width-3" />}
+          label="Next month"
+        />
+      </div>
+      <InteractiveGrid
+        matrix={daysMatrix}
+        className="calendar-grid"
+        aria-labelledby={labelId}
+      >
+        <InteractiveGrid.Row>
+          {weekHeaders.map((day) => (
+            <InteractiveGrid.ColumnHeader key={day.label}>
+              {day.display}
+            </InteractiveGrid.ColumnHeader>
           ))}
         </InteractiveGrid.Row>
-      ))}
-    </InteractiveGrid>
+        {daysMatrix.map((row, rowIndex) => (
+          <InteractiveGrid.Row key={rowIndex}>
+            {row.map((day, columnIndex) => (
+              <InteractiveGrid.Cell
+                key={columnIndex}
+                className="cell"
+                aria-selected={isSameDay(today, day)}
+              >
+                <Day
+                  coordinates={[rowIndex, columnIndex]}
+                  className={clsx(
+                    'touch-target font-weight-bold day',
+                    isSameMonth(day, today) ? 'text-strong' : null
+                  )}
+                  aria-label={format(day, 'do MMM yyyy iiii')}
+                >
+                  <time dateTime={format(day, 'yyyy-mm-dd')}>
+                    {format(day, 'd')}
+                  </time>
+                </Day>
+              </InteractiveGrid.Cell>
+            ))}
+          </InteractiveGrid.Row>
+        ))}
+      </InteractiveGrid>
+    </div>
   )
 }
 

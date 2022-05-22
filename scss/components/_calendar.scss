@@ -1,9 +1,19 @@
 .calendar {
+  --stack-gap: var(--size-7);
+  --gap: var(--size-2);
   max-width: fit-content;
-  justify-items: center;
-  align-items: center;
-  --gap: var(--size-4);
-  gap: var(--gap);
+
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .calendar-grid {
+    justify-items: center;
+    align-items: center;
+    gap: var(--gap);
+  }
 
   .day {
     --touch-target-mobile: calc(44px - calc(var(--gap) / 2));

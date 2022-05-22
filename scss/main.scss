@@ -10,6 +10,7 @@
 @use 'utilities/accessibility';
 @use 'utilities/border';
 @use 'utilities/color' as utilities-color;
+@use 'utilities/dimensions';
 @use 'utilities/padding';
 @use 'utilities/surface';
 @use 'utilities/typography' as utilities-typography;
@@ -18,6 +19,7 @@
 @use 'components/calendar';
 @use 'components/checkbox';
 @use 'components/filter-menu';
+@use 'components/icon-button';
 @use 'components/input-field';
 @use 'components/interactive-grid';
 @use 'components/invoice-id';
