@@ -1,9 +1,9 @@
 .interactive-grid {
   display: grid;
   grid-template-columns: repeat(var(--column-count), 1fr);
-  grid-template-rows: repeat(var(--row-count), 1fr);
+  grid-auto-rows: 1fr;
 
-  & [aria-role='row'] {
+  & [role='row'] {
     display: contents;
   }
 }
