@@ -2,11 +2,36 @@
   --stack-gap: var(--size-7);
   --gap: var(--size-2);
   max-width: fit-content;
+  padding: var(--size-5);
+  overflow: hidden;
 
   .header {
     display: flex;
     justify-content: space-between;
     align-items: center;
+  }
+
+  .grid-wrapper {
+    display: grid;
+    grid-template-areas: 'layer';
+    align-items: start;
+
+    > * {
+      grid-area: layer;
+      transition: opacity var(--transition-duration-slow) linear,
+        transform var(--transition-duration-slow) ease-in-out;
+    }
+
+    [aria-hidden] {
+      opacity: 0;
+    }
+
+    [data-month='previous'] {
+      transform: translateX(-100%);
+    }
+    [data-month='next'] {
+      transform: translateX(100%);
+    }
   }
 
   .calendar-grid {

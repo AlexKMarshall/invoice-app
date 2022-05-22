@@ -1,5 +1,5 @@
-import { ButtonHTMLAttributes, useRef, useReducer } from 'react'
-import { Coordinates, toMatrix } from '~/lib/matrix'
+import { ButtonHTMLAttributes, useRef, useReducer, HTMLAttributes } from 'react'
+import { Coordinates, Matrix, toMatrix } from '~/lib/matrix'
 import {
   InteractiveGrid,
   useGridCellContent,
@@ -12,6 +12,7 @@ import {
   format,
   isSameDay,
   isSameMonth,
+  monthsToQuarters,
   startOfMonth,
   startOfToday,
   startOfWeek,
@@ -57,11 +58,8 @@ export function Calendar({
     selectedDate: defaultSelectedDate ?? null,
     visibleMonth: defaultSelectedDate ?? startOfToday(),
   })
-  const daysOfMonth = eachDayOfInterval({
-    start: startOfWeek(startOfMonth(visibleMonth)),
-    end: endOfWeek(endOfMonth(visibleMonth)),
-  })
-  const daysMatrix = toMatrix(daysOfMonth, 7)
+  const previousMonth = addMonths(visibleMonth, -1)
+  const nextMonth = addMonths(visibleMonth, 1)
 
   const labelId = `${id}-label`
 
@@ -82,48 +80,94 @@ export function Calendar({
           onClick={() => dispatch({ type: 'nextMonth' })}
         />
       </div>
-      <InteractiveGrid
-        key={visibleMonth.toString()}
-        matrix={daysMatrix}
-        className="calendar-grid"
-        aria-labelledby={labelId}
-      >
-        <InteractiveGrid.Row>
-          {weekHeaders.map((day) => (
-            <InteractiveGrid.ColumnHeader key={day.label}>
-              {day.display}
-            </InteractiveGrid.ColumnHeader>
+      <div className="grid-wrapper">
+        <CalendarGrid
+          key={previousMonth.toISOString()}
+          onSelectDate={(date) =>
+            dispatch({ type: 'selectDate', payload: date })
+          }
+          month={previousMonth}
+          selectedDate={selectedDate}
+          data-month="previous"
+          aria-hidden
+        />
+        <CalendarGrid
+          key={visibleMonth.toISOString()}
+          aria-labelledby={labelId}
+          onSelectDate={(date) =>
+            dispatch({ type: 'selectDate', payload: date })
+          }
+          month={visibleMonth}
+          selectedDate={selectedDate}
+        />
+        <CalendarGrid
+          key={nextMonth.toISOString()}
+          onSelectDate={(date) =>
+            dispatch({ type: 'selectDate', payload: date })
+          }
+          month={nextMonth}
+          selectedDate={selectedDate}
+          data-month="next"
+          aria-hidden
+        />
+      </div>
+    </div>
+  )
+}
+
+type CalendarGridProps = {
+  month: Date
+  selectedDate: Date | null
+  onSelectDate: (date: Date) => void
+} & Omit<HTMLAttributes<HTMLDivElement>, 'className'>
+const CalendarGrid = ({
+  month,
+  selectedDate,
+  onSelectDate,
+  ...props
+}: CalendarGridProps) => {
+  const daysOfMonth = eachDayOfInterval({
+    start: startOfWeek(startOfMonth(month)),
+    end: endOfWeek(endOfMonth(month)),
+  })
+  const daysMatrix = toMatrix(daysOfMonth, 7)
+  return (
+    <InteractiveGrid matrix={daysMatrix} className="calendar-grid" {...props}>
+      <InteractiveGrid.Row>
+        {weekHeaders.map((day) => (
+          <InteractiveGrid.ColumnHeader key={day.label}>
+            {day.display}
+          </InteractiveGrid.ColumnHeader>
+        ))}
+      </InteractiveGrid.Row>
+      {daysMatrix.map((row, rowIndex) => (
+        <InteractiveGrid.Row key={rowIndex}>
+          {row.map((day, columnIndex) => (
+            <InteractiveGrid.Cell
+              key={day.toISOString()}
+              className="cell"
+              aria-selected={
+                !selectedDate ? undefined : isSameDay(selectedDate, day)
+              }
+            >
+              <Day
+                coordinates={[rowIndex, columnIndex]}
+                className={clsx(
+                  'touch-target font-weight-bold day',
+                  isSameMonth(day, month) ? 'text-strong' : null
+                )}
+                aria-label={format(day, 'do MMM yyyy iiii')}
+                onClick={() => onSelectDate(day)}
+              >
+                <time dateTime={format(day, 'yyyy-mm-dd')}>
+                  {format(day, 'd')}
+                </time>
+              </Day>
+            </InteractiveGrid.Cell>
           ))}
         </InteractiveGrid.Row>
-        {daysMatrix.map((row, rowIndex) => (
-          <InteractiveGrid.Row key={rowIndex}>
-            {row.map((day, columnIndex) => (
-              <InteractiveGrid.Cell
-                key={columnIndex}
-                className="cell"
-                aria-selected={
-                  !selectedDate ? undefined : isSameDay(selectedDate, day)
-                }
-              >
-                <Day
-                  coordinates={[rowIndex, columnIndex]}
-                  className={clsx(
-                    'touch-target font-weight-bold day',
-                    isSameMonth(day, visibleMonth) ? 'text-strong' : null
-                  )}
-                  aria-label={format(day, 'do MMM yyyy iiii')}
-                  onClick={() => dispatch({ type: 'selectDate', payload: day })}
-                >
-                  <time dateTime={format(day, 'yyyy-mm-dd')}>
-                    {format(day, 'd')}
-                  </time>
-                </Day>
-              </InteractiveGrid.Cell>
-            ))}
-          </InteractiveGrid.Row>
-        ))}
-      </InteractiveGrid>
-    </div>
+      ))}
+    </InteractiveGrid>
   )
 }
 
