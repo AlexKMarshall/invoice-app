@@ -1,10 +1,11 @@
-import { ButtonHTMLAttributes, useRef } from 'react'
+import { ButtonHTMLAttributes, useRef, useReducer } from 'react'
 import { Coordinates, toMatrix } from '~/lib/matrix'
 import {
   InteractiveGrid,
   useGridCellContent,
 } from '~/components/interactive-grid'
 import {
+  addMonths,
   eachDayOfInterval,
   endOfMonth,
   endOfWeek,
@@ -21,12 +22,44 @@ import { IconButton } from '../icon-button'
 import { ArrowLeftIcon } from '../icons/arrow-left'
 import { ArrowRightIcon } from '../icons/arrow-right'
 
-type Props = { id: string }
-export function Calendar({ id, ...props }: Props): JSX.Element {
-  const today = startOfToday()
+type State = {
+  visibleMonth: Date
+  selectedDate: Date | null
+}
+type Action =
+  | {
+      type: 'nextMonth'
+    }
+  | { type: 'previousMonth' }
+  | { type: 'selectDate'; payload: Date }
+const reducer = (state: State, action: Action): State => {
+  switch (action.type) {
+    case 'nextMonth':
+      return { ...state, visibleMonth: addMonths(state.visibleMonth, 1) }
+    case 'previousMonth':
+      return { ...state, visibleMonth: addMonths(state.visibleMonth, -1) }
+    case 'selectDate':
+      return {
+        ...state,
+        selectedDate: action.payload,
+        visibleMonth: action.payload,
+      }
+  }
+}
+
+type Props = { id: string; defaultSelectedDate?: Date }
+export function Calendar({
+  id,
+  defaultSelectedDate,
+  ...props
+}: Props): JSX.Element {
+  const [{ visibleMonth, selectedDate }, dispatch] = useReducer(reducer, {
+    selectedDate: defaultSelectedDate ?? null,
+    visibleMonth: defaultSelectedDate ?? startOfToday(),
+  })
   const daysOfMonth = eachDayOfInterval({
-    start: startOfWeek(startOfMonth(today)),
-    end: endOfWeek(endOfMonth(today)),
+    start: startOfWeek(startOfMonth(visibleMonth)),
+    end: endOfWeek(endOfMonth(visibleMonth)),
   })
   const daysMatrix = toMatrix(daysOfMonth, 7)
 
@@ -38,16 +71,19 @@ export function Calendar({ id, ...props }: Props): JSX.Element {
         <IconButton
           icon={<ArrowLeftIcon className="width-3" />}
           label="Previous month"
+          onClick={() => dispatch({ type: 'previousMonth' })}
         />
         <div id={labelId} className="text-strong font-weight-bold">
-          {format(today, 'MMM yyyy')}
+          {format(visibleMonth, 'MMM yyyy')}
         </div>
         <IconButton
           icon={<ArrowRightIcon className="width-3" />}
           label="Next month"
+          onClick={() => dispatch({ type: 'nextMonth' })}
         />
       </div>
       <InteractiveGrid
+        key={visibleMonth.toString()}
         matrix={daysMatrix}
         className="calendar-grid"
         aria-labelledby={labelId}
@@ -65,15 +101,18 @@ export function Calendar({ id, ...props }: Props): JSX.Element {
               <InteractiveGrid.Cell
                 key={columnIndex}
                 className="cell"
-                aria-selected={isSameDay(today, day)}
+                aria-selected={
+                  !selectedDate ? undefined : isSameDay(selectedDate, day)
+                }
               >
                 <Day
                   coordinates={[rowIndex, columnIndex]}
                   className={clsx(
                     'touch-target font-weight-bold day',
-                    isSameMonth(day, today) ? 'text-strong' : null
+                    isSameMonth(day, visibleMonth) ? 'text-strong' : null
                   )}
                   aria-label={format(day, 'do MMM yyyy iiii')}
+                  onClick={() => dispatch({ type: 'selectDate', payload: day })}
                 >
                   <time dateTime={format(day, 'yyyy-mm-dd')}>
                     {format(day, 'd')}
