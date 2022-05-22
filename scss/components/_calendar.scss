@@ -1,3 +1,19 @@
 .calendar {
   max-width: fit-content;
+  justify-items: center;
+  align-items: center;
+  --gap: var(--size-4);
+  gap: var(--gap);
+
+  .day {
+    --touch-target-mobile: calc(44px - calc(var(--gap) / 2));
+    display: grid;
+    place-items: center;
+    background: none;
+    border: none;
+  }
+
+  [aria-selected='true'] .day {
+    color: var(--color-primary);
+  }
 }

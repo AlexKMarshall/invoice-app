@@ -1,9 +1,9 @@
 .touch-target {
-  --touch-target: 44px;
+  --touch-target: var(--touch-target-mobile);
   min-width: var(--touch-target);
   min-height: var(--touch-target);
 
   @media (pointer: fine) {
-    --touch-target: 0;
+    --touch-target: var(--touch-target-mouse);
   }
 }

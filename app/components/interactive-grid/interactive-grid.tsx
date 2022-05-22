@@ -1,12 +1,5 @@
 import {
-  Coordinates,
-  Matrix,
-  Move,
-  getElement,
-  movePosition,
-  setElement,
-} from '~/lib/matrix'
-import {
+  CSSProperties,
   HTMLAttributes,
   KeyboardEventHandler,
   RefObject,
@@ -14,12 +7,21 @@ import {
   useRef,
   useState,
 } from 'react'
+import {
+  Coordinates,
+  Matrix,
+  Move,
+  getElement,
+  movePosition,
+  setElement,
+} from '~/lib/matrix'
 
 import { Cell } from './cell'
 import { ColumnHeader } from './column-header'
 import { Provider } from './context'
 import { Row } from './row'
 import { callAllEventHandlers } from '~/lib/event'
+import clsx from 'clsx'
 
 type GetGridPropsFn = (
   props?: Omit<HTMLAttributes<HTMLDivElement>, 'role'>
@@ -32,14 +34,26 @@ type Props<T extends unknown> = {
 export function InteractiveGrid<T extends unknown>({
   matrix,
   defaultFocusStop,
+  style,
+  className,
   ...props
 }: Props<T>): JSX.Element {
   const { registerRef, getGridProps, rovingFocusStop, setRovingFocusStop } =
     useGridWrapper({ matrix, defaultFocusStop })
+  const columnCount = matrix[0]?.length ?? 1
+  const columCountCustomProperty = {
+    '--column-count': columnCount,
+  } as CSSProperties
 
   return (
     <Provider value={{ rovingFocusStop, registerRef, setRovingFocusStop }}>
-      <div {...getGridProps(props)}></div>
+      <div
+        {...getGridProps({
+          ...props,
+          className: clsx('interactive-grid', className),
+          style: { ...columCountCustomProperty, ...style },
+        })}
+      />
     </Provider>
   )
 }

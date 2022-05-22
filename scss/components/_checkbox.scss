@@ -3,7 +3,6 @@
   grid-template-columns: 1em auto;
   align-items: center;
   gap: 1em;
-  cursor: pointer;
 
   & + & {
     margin-top: var(--size-3);
