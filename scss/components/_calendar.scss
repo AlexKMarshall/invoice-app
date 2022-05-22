@@ -4,6 +4,7 @@
   max-width: fit-content;
   padding: var(--size-5);
   overflow: hidden;
+  background: white;
 
   .header {
     display: flex;
@@ -12,17 +13,15 @@
   }
 
   .grid-wrapper {
-    display: grid;
-    grid-template-areas: 'layer';
-    align-items: start;
+    position: relative;
 
     > * {
-      grid-area: layer;
       transition: opacity var(--transition-duration-slow) linear,
         transform var(--transition-duration-slow) ease-in-out;
     }
 
     [aria-hidden] {
+      position: absolute;
       opacity: 0;
     }
 
