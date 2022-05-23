@@ -6,6 +6,11 @@
   *::after {
     -webkit-tap-highlight-color: transparent;
   }
+
+  :root {
+    --touch-target-mobile: 44px;
+    --touch-target-mouse: 0px;
+  }
 }
 
 @tailwind components;
@@ -30,5 +35,16 @@
   }
   .status-color-draft-dark {
     --status-color-hsl: 231deg 75% 93%;
+  }
+
+  .touch-target {
+    --touch-target: var(--touch-target-mobile);
+    min-width: var(--touch-target);
+    min-height: var(--touch-target);
+  }
+  @media (pointer: fine) {
+    .touch-target {
+      --touch-target: var(--touch-target-mouse);
+    }
   }
 }

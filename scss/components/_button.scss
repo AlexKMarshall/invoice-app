@@ -1,21 +1,4 @@
-@use '../abstracts/typography' as *;
-
 .button {
-  font-weight: $font-weight-bold;
-
-  padding-block: var(--size-4);
-  padding-inline: var(--size-6);
-
-  --touch-target: 44px;
-  min-width: var(--touch-target);
-  min-height: var(--touch-target);
-
-  @media (pointer: fine) {
-    --touch-target: 0;
-  }
-
-  border: none;
-
   --button-background-default: var(--button-background-light);
   --button-text-default: var(--button-text-light);
   --button-hover-default: var(--button-hover-light);
@@ -28,8 +11,6 @@
 
   background-color: var(--button-background);
   color: var(--button-text);
-  outline-color: transparent;
-  outline-offset: 0px;
 
   --transition-duration-color: var(--transition-duration-medium);
   --transition-timing-color: linear;
@@ -55,10 +36,7 @@
 
   &:focus-visible {
     background-color: var(--button-hover);
-    outline-width: 3px;
-    outline-style: solid;
     outline-color: var(--button-hover);
-    outline-offset: 4px;
   }
 
   [data-theme='dark'] & {
