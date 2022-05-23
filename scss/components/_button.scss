@@ -1,32 +1,32 @@
 .button {
-  --button-background-default: var(--button-background-light);
-  --button-text-default: var(--button-text-light);
-  --button-hover-default: var(--button-hover-light);
-  --button-background: var(
-    --button-background-variable,
-    var(--button-background-default)
-  );
-  --button-text: var(--button-text-variable, var(--button-text-default));
-  --button-hover: var(--button-hover-variable, var(--button-hover-default));
+  // --button-background-default: var(--button-background-light);
+  // --button-text-default: var(--button-text-light);
+  // --button-hover-default: var(--button-hover-light);
+  // --button-background: var(
+  //   --button-background-variable,
+  //   var(--button-background-default)
+  // );
+  // --button-text: var(--button-text-variable, var(--button-text-default));
+  // --button-hover: var(--button-hover-variable, var(--button-hover-default));
 
-  background-color: var(--button-background);
-  color: var(--button-text);
+  // background-color: var(--button-background);
+  // color: var(--button-text);
 
-  --transition-duration-color: var(--transition-duration-medium);
-  --transition-timing-color: linear;
-  --transition-duration-space: var(--transition-duration-fast);
-  --transition-timing-space: ease;
+  // --transition-duration-color: var(--transition-duration-medium);
+  // --transition-timing-color: linear;
+  // --transition-duration-space: var(--transition-duration-fast);
+  // --transition-timing-space: ease;
 
-  transition: background-color var(--transition-duration-color)
-      var(--transition-timing-color),
-    outline-color var(--transition-duration-color)
-      var(--transition-timing-color),
-    outline-offset var(--transition-duration-space)
-      var(--transition-timing-space);
+  // transition: background-color var(--transition-duration-color)
+  //     var(--transition-timing-color),
+  //   outline-color var(--transition-duration-color)
+  //     var(--transition-timing-color),
+  //   outline-offset var(--transition-duration-space)
+  //     var(--transition-timing-space);
 
   @media (hover: hover) {
     &:hover {
-      background-color: var(--button-hover);
+      // background-color: var(--button-hover);
     }
   }
 
@@ -35,8 +35,8 @@
   }
 
   &:focus-visible {
-    background-color: var(--button-hover);
-    outline-color: var(--button-hover);
+    // background-color: var(--button-hover);
+    // outline-color: var(--button-hover);
   }
 
   [data-theme='dark'] & {
@@ -49,40 +49,40 @@
 $color-schemes: (
   primary: (
     light: (
-      background: hsl(253deg 93% 67%),
-      text: hsl(253deg 0% 100%),
-      hover: hsl(252deg 100% 73%),
+      // background: hsl(253deg 93% 67%),
+      // text: hsl(253deg 0% 100%),
+      // hover: hsl(252deg 100% 73%),,,,,,,,,
     ),
   ),
   secondary: (
     light: (
-      background: hsl(231deg 67% 99%),
-      text: hsl(231deg 36% 63%),
-      hover: hsl(231deg 73% 93%),
+      // background: hsl(231deg 67% 99%),
+      // text: hsl(231deg 36% 63%),
+      // hover: hsl(231deg 73% 93%),,,,,
     ),
     dark: (
-      background: hsl(233deg 30% 21%),
-      text: hsl(231deg 75% 93%),
-      hover: hsl(233deg 30% 100%),
+      // background: hsl(233deg 30% 21%),
+      // text: hsl(231deg 75% 93%),
+      // hover: hsl(233deg 30% 100%),,,,
     ),
   ),
   mono: (
     light: (
-      background: hsl(231deg 20% 27%),
-      text: hsl(231deg 20% 61%),
-      hover: hsl(231deg 28% 7%),
+      // background: hsl(231deg 20% 27%),
+      // text: hsl(231deg 20% 61%),
+      // hover: hsl(231deg 28% 7%),,,
     ),
     dark: (
-      background: hsl(231deg 20% 27%),
-      text: hsl(231deg 75% 93%),
-      hover: hsl(231deg 31% 17%),
+      // background: hsl(231deg 20% 27%),
+      // text: hsl(231deg 75% 93%),
+      // hover: hsl(231deg 31% 17%),,,
     ),
   ),
   danger: (
     light: (
-      background: var(--color-danger),
-      text: hsl(253deg 0% 100%),
-      hover: hsl(0deg 100% 80%),
+      // background: var(--color-danger),
+      // text: hsl(253deg 0% 100%),
+      // hover: hsl(0deg 100% 80%),,
     ),
   ),
 );

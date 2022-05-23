@@ -25,6 +25,7 @@ export function Button({
       className={clsx(
         'rounded-full py-4 px-6 font-bold outline outline-offset-0 outline-transparent',
         'focus-visible:outline-2 focus-visible:outline-offset-4',
+        'button-color',
         blockClass,
         variantClass
       )}
