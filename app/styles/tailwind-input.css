@@ -26,7 +26,7 @@
   .status-color-draft {
     --status-color-hsl: 231deg 20% 27%;
 
-    @apply status-color-draft-dark;
+    @apply dark:status-color-draft-dark;
   }
   .status-color-draft-dark {
     --status-color-hsl: 231deg 75% 93%;
