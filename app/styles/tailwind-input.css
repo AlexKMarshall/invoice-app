@@ -10,3 +10,25 @@
 
 @tailwind components;
 @tailwind utilities;
+
+@layer utilities {
+  .status-color {
+    --status-color: hsl(var(--status-color-hsl));
+    --status-color-transparent: hsl(var(--status-color-hsl) / 6%);
+  }
+
+  .status-color-paid {
+    --status-color-hsl: 160deg 67% 52%;
+  }
+  .status-color-pending {
+    --status-color-hsl: 34deg 100% 50%;
+  }
+  .status-color-draft {
+    --status-color-hsl: 231deg 20% 27%;
+
+    @apply status-color-draft-dark;
+  }
+  .status-color-draft-dark {
+    --status-color-hsl: 231deg 75% 93%;
+  }
+}

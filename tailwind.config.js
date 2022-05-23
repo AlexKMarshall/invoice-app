@@ -26,21 +26,9 @@ module.exports = {
     },
     extend: {
       colors: {
-        paid: {
-          DEFAULT: 'hsl(160deg 67% 52%)',
-          transparent: 'hsl(160deg 67% 52% / 6%)',
-        },
-        pending: {
-          DEFAULT: 'hsl(34deg 100% 50%)',
-          transparent: 'hsl(34deg 100% 50% / 6%)',
-        },
-        draft: {
-          DEFAULT: 'hsl(231deg 20% 27%)',
-          transparent: 'hsl(231deg 20% 27%/ 6%)',
-          dark: {
-            DEFAULT: 'hsl(231deg 75% 93%)',
-            transparent: 'hsl(231deg 75% 93%/ 6%)',
-          },
+        status: {
+          DEFAULT: 'var(--status-color)',
+          transparent: 'var(--status-color-transparent)',
         },
       },
     },
