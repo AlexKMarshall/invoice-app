@@ -13,6 +13,12 @@
 
     --color-primary: hsl(253deg 93% 67%);
     --color-danger: hsl(0deg 80% 63%);
+
+    --surface-alt: hsl(231deg 73% 93%);
+  }
+
+  .dark {
+    --surface-alt: hsl(233deg 31% 17%);
   }
 }
 

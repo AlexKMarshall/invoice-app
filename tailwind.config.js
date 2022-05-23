@@ -2,14 +2,6 @@ module.exports = {
   content: ['./app/**/*.{ts,tsx,jsx,js}'],
   darkMode: 'class',
   theme: {
-    borderRadius: {
-      none: 0,
-      DEFAULT: '0.25rem',
-      md: '0.375rem',
-      lg: '0.5rem',
-      full: '100rem',
-      circle: '50%',
-    },
     spacing: {
       1: '0.375rem',
       2: '0.5rem',
@@ -25,10 +17,19 @@ module.exports = {
       12: '4.5rem',
     },
     extend: {
+      borderRadius: {
+        circle: '50%',
+      },
       colors: {
         status: {
           DEFAULT: 'var(--status-color)',
           transparent: 'var(--status-color-transparent)',
+        },
+        strong: 'var(--text-strong)',
+        primary: 'var(--color-primary)',
+        surface: {
+          DEFAULT: 'var(--surface)',
+          alt: 'var(--surface-alt)',
         },
       },
     },
