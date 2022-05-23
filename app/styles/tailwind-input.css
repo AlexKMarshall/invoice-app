@@ -78,7 +78,7 @@
     @apply dark:button-color-secondary-dark;
   }
   .button-color-secondary-dark {
-    --background-color: hsl(233deg 30% 21);
+    --background-color: hsl(233deg 30% 21%);
     --background-color-hover: hsl(233deg 30% 100%);
     --text-color: hsl(231deg 75% 93%);
   }
