@@ -1,3 +1,4 @@
+import clsx from 'clsx'
 import { InputHTMLAttributes } from 'react'
 
 type Props = { label: string; id: string; errorMessage?: string } & Omit<
@@ -16,7 +17,7 @@ export function InputField({
 
   return (
     <div
-      className="stack font-size-2 input-field"
+      className={clsx('stack gap-2', 'font-size-2 input-field')}
       data-invalid={isInvalid || undefined}
       data-readonly={readOnly || undefined}
     >
@@ -28,7 +29,9 @@ export function InputField({
       </div>
       <input
         id={id}
-        className="surface1 text-strong padding-block-4 padding-inline-5 radius-xs font-weight-bold"
+        className={clsx(
+          'rounded-sm border-none px-5 py-4 font-bold text-strong outline outline-1'
+        )}
         aria-invalid={isInvalid || undefined}
         aria-errormessage={isInvalid ? errorMessageId : undefined}
         readOnly={readOnly}

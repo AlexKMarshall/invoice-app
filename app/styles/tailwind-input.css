@@ -115,4 +115,12 @@
     --background-color-hover: hsl(0deg 100% 80%);
     --text-color: hsl(253deg 0% 100%);
   }
+
+  .stack {
+    @apply flex flex-col;
+  }
+
+  .cluster {
+    @apply flex flex-wrap;
+  }
 }
