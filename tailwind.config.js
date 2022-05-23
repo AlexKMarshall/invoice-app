@@ -31,6 +31,7 @@ module.exports = {
           DEFAULT: 'var(--surface)',
           alt: 'var(--surface-alt)',
         },
+        regular: 'var(--text-regular)',
       },
     },
   },

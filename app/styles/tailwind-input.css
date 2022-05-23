@@ -15,10 +15,17 @@
     --color-danger: hsl(0deg 80% 63%);
 
     --surface-alt: hsl(231deg 73% 93%);
+
+    --text-regular: hsl(231deg 23% 61%);
   }
 
   .dark {
     --surface-alt: hsl(233deg 31% 17%);
+    --text-regular: hsl(231deg 75% 93%);
+  }
+
+  body {
+    color: var(--text-regular);
   }
 }
 
