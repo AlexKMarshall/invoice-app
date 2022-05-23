@@ -59,8 +59,10 @@
     background-color: var(--background-color-hover);
     outline-color: var(--background-color-hover);
   }
-  .button-color:hover {
-    background-color: var(--background-color-hover);
+  @media hover {
+    .button-color:hover {
+      background-color: var(--background-color-hover);
+    }
   }
 
   .button-color-primary {

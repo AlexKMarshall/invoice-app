@@ -17,17 +17,14 @@ export function Button({
   color = 'primary',
   ...props
 }: Props): JSX.Element {
-  const blockClass = 'button'
-  const variantClass = colorClassMap[color]
-
   return (
     <button
       className={clsx(
         'rounded-full py-4 px-6 font-bold outline outline-offset-0 outline-transparent',
         'focus-visible:outline-2 focus-visible:outline-offset-4',
+        'active:brightness-90',
         'button-color',
-        blockClass,
-        variantClass
+        colorClassMap[color]
       )}
       {...props}
     >
