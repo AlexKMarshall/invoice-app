@@ -1,0 +1,12 @@
+@tailwind base;
+
+@layer base {
+  *,
+  *::before,
+  *::after {
+    -webkit-tap-highlight-color: transparent;
+  }
+}
+
+@tailwind components;
+@tailwind utilities;

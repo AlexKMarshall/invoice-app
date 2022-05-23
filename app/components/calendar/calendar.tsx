@@ -1,5 +1,5 @@
 import { ButtonHTMLAttributes, useRef, useReducer, HTMLAttributes } from 'react'
-import { Coordinates, Matrix, toMatrix } from '~/lib/matrix'
+import { Coordinates, toMatrix } from '~/lib/matrix'
 import {
   InteractiveGrid,
   useGridCellContent,
@@ -12,7 +12,6 @@ import {
   format,
   isSameDay,
   isSameMonth,
-  monthsToQuarters,
   startOfMonth,
   startOfToday,
   startOfWeek,

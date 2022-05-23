@@ -15,7 +15,7 @@
     "dev:sass": "npm run generate:sass -- --watch",
     "dev:remix": "cross-env NODE_ENV=development binode --require ./mocks -- @remix-run/dev:remix dev",
     "format": "prettier --write .",
-    "generate:tailwind": "tailwindcss -o ./app/styles/tailwind.css",
+    "generate:tailwind": "tailwindcss -i ./app/styles/tailwind-input.css -o ./app/styles/tailwind.css",
     "generate:sass": "sass scss:app/styles/sass-output",
     "postinstall": "remix setup node",
     "lint": "eslint --cache --cache-location ./node_modules/.cache/eslint .",
