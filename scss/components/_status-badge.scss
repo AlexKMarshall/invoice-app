@@ -1,17 +1,5 @@
-@use '../abstracts/typography' as *;
-
 .status-badge {
-  display: inline-flex;
-  justify-content: center;
-  align-items: baseline;
-  gap: var(--size-2);
   min-width: 6.25rem; // hack to make status same size in absence of subgrid
-
-  padding-block: var(--size-3);
-  padding-inline: var(--size-4);
-
-  font-weight: $font-weight-bold;
-  text-transform: capitalize;
 
   --status-badge-alpha: 6%;
   --status-badge-hsl-default: var(--status-badge-hsl-light);
@@ -28,11 +16,6 @@
   color: var(--status-badge-foreground);
 
   &:before {
-    content: '';
-    display: block;
-    width: var(--size-2);
-    aspect-ratio: 1 / 1;
-    border-radius: var(--radius-circle);
     background-color: var(--status-badge-foreground);
   }
 
