@@ -57,6 +57,8 @@ button,
 textarea,
 select {
   font: inherit;
+  cursor: pointer;
+  color: inherit;
 }
 
 /* Remove border and padding from fieldset */

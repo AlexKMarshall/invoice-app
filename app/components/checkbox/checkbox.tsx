@@ -15,7 +15,7 @@ export function Checkbox({
   const name = nameOverride ?? checkboxGroup?.name
 
   return (
-    <label className="text-strong checkbox">
+    <label className="text-strong touch-target checkbox">
       <input type="checkbox" name={name} {...props} />
       {children}
     </label>

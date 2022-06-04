@@ -1,12 +1,5 @@
 import {
-  Coordinates,
-  Matrix,
-  Move,
-  getElement,
-  movePosition,
-  setElement,
-} from '~/lib/matrix'
-import {
+  CSSProperties,
   HTMLAttributes,
   KeyboardEventHandler,
   RefObject,
@@ -14,12 +7,21 @@ import {
   useRef,
   useState,
 } from 'react'
+import {
+  Coordinates,
+  Matrix,
+  Move,
+  getElement,
+  movePosition,
+  setElement,
+} from '~/lib/matrix'
 
 import { Cell } from './cell'
 import { ColumnHeader } from './column-header'
 import { Provider } from './context'
 import { Row } from './row'
 import { callAllEventHandlers } from '~/lib/event'
+import clsx from 'clsx'
 
 type GetGridPropsFn = (
   props?: Omit<HTMLAttributes<HTMLDivElement>, 'role'>
@@ -27,17 +29,31 @@ type GetGridPropsFn = (
 
 type Props<T extends unknown> = {
   matrix: Matrix<T>
+  defaultFocusStop?: Coordinates
 } & Omit<HTMLAttributes<HTMLDivElement>, 'role'>
 export function InteractiveGrid<T extends unknown>({
   matrix,
+  defaultFocusStop,
+  style,
+  className,
   ...props
 }: Props<T>): JSX.Element {
   const { registerRef, getGridProps, rovingFocusStop, setRovingFocusStop } =
-    useGridWrapper(matrix)
+    useGridWrapper({ matrix, defaultFocusStop })
+  const columnCount = matrix[0]?.length ?? 1
+  const columCountCustomProperty = {
+    '--column-count': columnCount,
+  } as CSSProperties
 
   return (
     <Provider value={{ rovingFocusStop, registerRef, setRovingFocusStop }}>
-      <div {...getGridProps(props)}></div>
+      <div
+        {...getGridProps({
+          ...props,
+          className: clsx('interactive-grid', className),
+          style: { ...columCountCustomProperty, ...style },
+        })}
+      />
     </Provider>
   )
 }
@@ -53,7 +69,11 @@ const keyMoveMap: Record<string, Move | undefined> = {
   ArrowRight: 'right',
 }
 
-const useGridWrapper = (matrix: Matrix) => {
+type UseGridWrapperProps = {
+  matrix: Matrix
+  defaultFocusStop?: Coordinates
+}
+const useGridWrapper = ({ matrix, defaultFocusStop }: UseGridWrapperProps) => {
   const refsMatrix = useRef<Matrix<RefObject<HTMLButtonElement> | undefined>>(
     []
   )
@@ -65,7 +85,9 @@ const useGridWrapper = (matrix: Matrix) => {
     []
   )
 
-  const [rovingFocusStop, setRovingFocusStop] = useState<Coordinates>([0, 0])
+  const [rovingFocusStop, setRovingFocusStop] = useState<Coordinates>(
+    defaultFocusStop ?? [0, 0]
+  )
 
   const moveFocus = (move: Move) => {
     const newPosition = movePosition(matrix, rovingFocusStop, move)

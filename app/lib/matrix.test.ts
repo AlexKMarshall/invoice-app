@@ -1,4 +1,26 @@
-import { Matrix, getElement, map, movePosition, setElement } from './matrix'
+import {
+  Matrix,
+  getElement,
+  map,
+  movePosition,
+  setElement,
+  toMatrix,
+} from './matrix'
+
+describe('toMatrix', () => {
+  test('converts array to matrix', () => {
+    const array = [1, 2, 3, 4, 5, 6]
+    expect(toMatrix(array, 2)).toEqual([
+      [1, 2],
+      [3, 4],
+      [5, 6],
+    ])
+    expect(toMatrix(array, 3)).toEqual([
+      [1, 2, 3],
+      [4, 5, 6],
+    ])
+  })
+})
 
 describe('movePosition', () => {
   test('should move stepwise', () => {

@@ -3,14 +3,6 @@
   grid-template-columns: 1em auto;
   align-items: center;
   gap: 1em;
-  cursor: pointer;
-  --touch-target: 44px;
-  min-width: var(--touch-target);
-  min-height: var(--touch-target);
-
-  @media (pointer: fine) {
-    --touch-target: 0;
-  }
 
   & + & {
     margin-top: var(--size-3);

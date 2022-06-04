@@ -1,0 +1,53 @@
+.calendar {
+  --stack-gap: var(--size-7);
+  --gap: var(--size-2);
+  max-width: fit-content;
+  padding: var(--size-5);
+  overflow: hidden;
+  background: white;
+
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .grid-wrapper {
+    position: relative;
+
+    > * {
+      transition: opacity var(--transition-duration-slow) linear,
+        transform var(--transition-duration-slow) ease-in-out;
+    }
+
+    [aria-hidden] {
+      position: absolute;
+      opacity: 0;
+    }
+
+    [data-month='previous'] {
+      transform: translateX(-100%);
+    }
+    [data-month='next'] {
+      transform: translateX(100%);
+    }
+  }
+
+  .calendar-grid {
+    justify-items: center;
+    align-items: center;
+    gap: var(--gap);
+  }
+
+  .day {
+    --touch-target-mobile: calc(44px - calc(var(--gap) / 2));
+    display: grid;
+    place-items: center;
+    background: none;
+    border: none;
+  }
+
+  [aria-selected='true'] .day {
+    color: var(--color-primary);
+  }
+}
