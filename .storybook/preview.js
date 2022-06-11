@@ -1,3 +1,4 @@
+import '../app/styles/tailwind.css'
 import '../app/styles/sass-output/main.css'
 
 import { surface } from '../app/storybook-helpers/surface'

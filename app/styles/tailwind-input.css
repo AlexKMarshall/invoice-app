@@ -1,0 +1,126 @@
+@tailwind base;
+
+@layer base {
+  *,
+  *::before,
+  *::after {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  :root {
+    --touch-target-mobile: 44px;
+    --touch-target-mouse: 0px;
+
+    --color-primary: hsl(253deg 93% 67%);
+    --color-danger: hsl(0deg 80% 63%);
+
+    --surface-alt: hsl(231deg 73% 93%);
+
+    --text-regular: hsl(231deg 23% 61%);
+  }
+
+  .dark {
+    --surface-alt: hsl(233deg 31% 17%);
+    --text-regular: hsl(231deg 75% 93%);
+  }
+
+  body {
+    color: var(--text-regular);
+  }
+}
+
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+  .status-color {
+    --status-color: hsl(var(--status-color-hsl));
+    --status-color-transparent: hsl(var(--status-color-hsl) / 6%);
+  }
+
+  .status-color-paid {
+    --status-color-hsl: 160deg 67% 52%;
+  }
+  .status-color-pending {
+    --status-color-hsl: 34deg 100% 50%;
+  }
+  .status-color-draft {
+    --status-color-hsl: 231deg 20% 27%;
+
+    @apply dark:status-color-draft-dark;
+  }
+  .status-color-draft-dark {
+    --status-color-hsl: 231deg 75% 93%;
+  }
+
+  .touch-target {
+    --touch-target: var(--touch-target-mobile);
+    min-width: var(--touch-target);
+    min-height: var(--touch-target);
+  }
+  @media (pointer: fine) {
+    .touch-target {
+      --touch-target: var(--touch-target-mouse);
+    }
+  }
+
+  .button-color {
+    background-color: var(--background-color);
+    color: var(--text-color);
+  }
+  .button-color:focus-visible {
+    background-color: var(--background-color-hover);
+    outline-color: var(--background-color-hover);
+  }
+  @media hover {
+    .button-color:hover {
+      background-color: var(--background-color-hover);
+    }
+  }
+
+  .button-color-primary {
+    --background-color: var(--color-primary);
+    --background-color-hover: hsl(252deg 100% 73%);
+    --text-color: hsl(253deg 0% 100%);
+  }
+  .button-color-secondary {
+    --background-color: hsl(231deg 67% 99%);
+    --background-color-hover: hsl(231deg 73% 93%);
+    --text-color: hsl(231deg 36% 63%);
+
+    @apply dark:button-color-secondary-dark;
+  }
+  .button-color-secondary-dark {
+    --background-color: hsl(233deg 30% 21%);
+    --background-color-hover: hsl(233deg 30% 100%);
+    --text-color: hsl(231deg 75% 93%);
+  }
+
+  .button-color-mono {
+    --background-color: hsl(231deg 20% 27%);
+    --background-color-hover: hsl(231deg 28% 7%);
+    --text-color: hsl(231deg 20% 61%);
+
+    @apply dark:button-color-mono-dark;
+  }
+
+  .button-color-mono-dark {
+    --background-color: hsl(231deg 20% 27%);
+    --background-color-hover: hsl(231deg 31% 17%);
+    --text-color: hsl(231deg 75% 93%);
+  }
+
+  .button-color-danger {
+    --background-color: var(--color-danger);
+    --background-color-hover: hsl(0deg 100% 80%);
+    --text-color: hsl(253deg 0% 100%);
+  }
+
+  .stack {
+    @apply flex flex-col;
+  }
+
+  .cluster {
+    @apply flex flex-wrap;
+  }
+}
